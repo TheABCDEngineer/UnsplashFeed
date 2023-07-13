@@ -7,7 +7,11 @@
 
 import UIKit
 
-class ImageListViewController: UIViewController {
+final class ImageListViewController: UIViewController {
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     @IBOutlet private var tableView: UITableView!
         
@@ -15,17 +19,10 @@ class ImageListViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.register(
+            UINib(nibName: ImageListCell.identifier, bundle: nil),
+            forCellReuseIdentifier: ImageListCell.identifier)
     }
-    
-    func configCell(for cell: ImageListCell, with indexPath: IndexPath) {
-        cell.contentImage.image = UIImage(named: String(indexPath.row))
-        cell.favorites.image = Bool.random() ? UIImage(named: "Favorites_Active") : UIImage(named: "Favorites_NoActive")
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM YYYY"
-        cell.dateLabel.text = dateFormatter.string(from: Date())
-    }
-
 }
 
 extension ImageListViewController: UITableViewDataSource {
@@ -34,13 +31,15 @@ extension ImageListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ImageListCell.identifier, for: indexPath)
-                
-        guard let imageListCell = cell as? ImageListCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ImageListCell.identifier, for: indexPath) as? ImageListCell else {
             return UITableViewCell()
         }
-        configCell(for: imageListCell, with: indexPath)
-        return imageListCell
+        cell.configCell(
+            image: UIImage(named: String(indexPath.row)),
+            date: Date(),
+            isFavorite: Bool.random()
+        )
+        return cell
     }
 }
 

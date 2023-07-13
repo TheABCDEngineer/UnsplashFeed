@@ -16,6 +16,7 @@
 		AB612B052A54095100A052EE /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB612B042A54095100A052EE /* UIColor+Extensions.swift */; };
 		AB612B082A54142000A052EE /* ImageListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB612B072A54142000A052EE /* ImageListPresenter.swift */; };
 		ABBBA4142A54239B007BBEBE /* ImageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBA4132A54239B007BBEBE /* ImageListCell.swift */; };
+		ABD1BA792A6002A90030753D /* ImageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABD1BA782A6002A90030753D /* ImageListCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		AB612B042A54095100A052EE /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		AB612B072A54142000A052EE /* ImageListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListPresenter.swift; sourceTree = "<group>"; };
 		ABBBA4132A54239B007BBEBE /* ImageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListCell.swift; sourceTree = "<group>"; };
+		ABD1BA782A6002A90030753D /* ImageListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageListCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				AB612AED2A4EB7D500A052EE /* ImageListViewController.swift */,
 				AB612B072A54142000A052EE /* ImageListPresenter.swift */,
 				ABBBA4132A54239B007BBEBE /* ImageListCell.swift */,
+				ABD1BA782A6002A90030753D /* ImageListCell.xib */,
 			);
 			path = ImageView;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB612AF62A4EB7D500A052EE /* LaunchScreen.storyboard in Resources */,
+				ABD1BA792A6002A90030753D /* ImageListCell.xib in Resources */,
 				AB612B022A54081400A052EE /* Assets.xcassets in Resources */,
 				AB612AF12A4EB7D500A052EE /* Main.storyboard in Resources */,
 			);
