@@ -12,14 +12,27 @@ final class ProfileViewController: UIViewController {
     private var userNameView: UILabel!
     private var userLinkView: UILabel!
     private var userSelfStatusView: UILabel!
-    @objc private var logoutButton: UIButton!
+    private var logoutButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .ypBlack
         configureLayout()
+        
+        //будет пустым до авторизации и будет заменено реальными данными юзера после авторизации
+        userImageView.image = UIImage(named: "userImageMock")
+        userNameView.text = "Екатерина Новикова"
+        userLinkView.text = "@ekaterina_nov"
+        userSelfStatusView.text = "Hello, world!"
     }
     
+    @objc
+    private func onLogoutButtonClick() {
+     
+    }
+}
+
+extension ProfileViewController {
     private func configureLayout() {
         let userImageSupperView = UIImageView()
         userImageSupperView.image = UIImage(systemName: "circle.fill")
@@ -74,7 +87,7 @@ final class ProfileViewController: UIViewController {
             target: self,
             action: #selector(self.onLogoutButtonClick)
         )
-        logoutButton.tintColor = .red
+        logoutButton.tintColor = .ypRed
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
         logoutButton.heightAnchor.constraint(equalToConstant: 22).isActive = true
@@ -86,12 +99,6 @@ final class ProfileViewController: UIViewController {
         logoutButton.centerYAnchor.constraint(
             equalTo: userImageSupperView.centerYAnchor
         ).isActive = true
-      
-        //будет пустым до авторизации и будет заменено реальными данными юзера после авторизации
-        userNameView.text = "Екатерина Новикова"
-        userLinkView.text = "@ekaterina_nov"
-        userSelfStatusView.text = "Hello, world!"
-        
     }
     
     private func initUserPropertyLabel(
@@ -112,10 +119,5 @@ final class ProfileViewController: UIViewController {
             equalTo: previousLabelBottomAnchor,
             constant: 8
         ).isActive = true
-    }
-    
-    @objc
-    private func onLogoutButtonClick() {
-     
     }
 }
