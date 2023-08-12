@@ -15,6 +15,8 @@
 		AB612B022A54081400A052EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB612B012A54081400A052EE /* Assets.xcassets */; };
 		AB612B052A54095100A052EE /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB612B042A54095100A052EE /* UIColor+Extensions.swift */; };
 		AB612B082A54142000A052EE /* ImageListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB612B072A54142000A052EE /* ImageListPresenter.swift */; };
+		ABB5D6CC2A7FB8960013A62E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB5D6CB2A7FB8960013A62E /* ProfileViewController.swift */; };
+		ABB5D6D12A7FD3920013A62E /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB5D6D02A7FD3920013A62E /* SingleImageViewController.swift */; };
 		ABBBA4142A54239B007BBEBE /* ImageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBA4132A54239B007BBEBE /* ImageListCell.swift */; };
 		ABD1BA792A6002A90030753D /* ImageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABD1BA782A6002A90030753D /* ImageListCell.xib */; };
 /* End PBXBuildFile section */
@@ -30,6 +32,8 @@
 		AB612B012A54081400A052EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB612B042A54095100A052EE /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		AB612B072A54142000A052EE /* ImageListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListPresenter.swift; sourceTree = "<group>"; };
+		ABB5D6CB2A7FB8960013A62E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		ABB5D6D02A7FD3920013A62E /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		ABBBA4132A54239B007BBEBE /* ImageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListCell.swift; sourceTree = "<group>"; };
 		ABD1BA782A6002A90030753D /* ImageListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageListCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,39 +68,15 @@
 		AB612AE82A4EB7D500A052EE /* UnsplashFeed */ = {
 			isa = PBXGroup;
 			children = (
+				AB612AEF2A4EB7D500A052EE /* Main.storyboard */,
+				ABF0A2252A824CA5003F2448 /* Features */,
 				AB612AF72A4EB7D500A052EE /* Info.plist */,
 				AB612B032A54091C00A052EE /* Helpers */,
 				AB612B002A54011E00A052EE /* Resources */,
-				AB612AFF2A53FFCC00A052EE /* Presentation */,
-				AB612AFE2A53FFBD00A052EE /* Service */,
-				AB612AFD2A53FFAD00A052EE /* Data */,
 				AB612AE92A4EB7D500A052EE /* AppDelegate.swift */,
 				AB612AEB2A4EB7D500A052EE /* SceneDelegate.swift */,
 			);
 			path = UnsplashFeed;
-			sourceTree = "<group>";
-		};
-		AB612AFD2A53FFAD00A052EE /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		AB612AFE2A53FFBD00A052EE /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		AB612AFF2A53FFCC00A052EE /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				AB612B062A54139400A052EE /* ImageView */,
-				AB612AEF2A4EB7D500A052EE /* Main.storyboard */,
-			);
-			path = Presentation;
 			sourceTree = "<group>";
 		};
 		AB612B002A54011E00A052EE /* Resources */ = {
@@ -116,7 +96,41 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		AB612B062A54139400A052EE /* ImageView */ = {
+		AB612B062A54139400A052EE /* ImageFeed */ = {
+			isa = PBXGroup;
+			children = (
+				ABF0A2262A824CF6003F2448 /* Presentation */,
+			);
+			path = ImageFeed;
+			sourceTree = "<group>";
+		};
+		ABB5D6CA2A7FB81A0013A62E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				ABF0A2272A824D23003F2448 /* Presentation */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		ABB5D6CF2A7FD3610013A62E /* SingleImageView */ = {
+			isa = PBXGroup;
+			children = (
+				ABF0A2282A824D35003F2448 /* Presentation */,
+			);
+			path = SingleImageView;
+			sourceTree = "<group>";
+		};
+		ABF0A2252A824CA5003F2448 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				AB612B062A54139400A052EE /* ImageFeed */,
+				ABB5D6CA2A7FB81A0013A62E /* Profile */,
+				ABB5D6CF2A7FD3610013A62E /* SingleImageView */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		ABF0A2262A824CF6003F2448 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				AB612AED2A4EB7D500A052EE /* ImageListViewController.swift */,
@@ -124,7 +138,23 @@
 				ABBBA4132A54239B007BBEBE /* ImageListCell.swift */,
 				ABD1BA782A6002A90030753D /* ImageListCell.xib */,
 			);
-			path = ImageView;
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		ABF0A2272A824D23003F2448 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				ABB5D6CB2A7FB8960013A62E /* ProfileViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		ABF0A2282A824D35003F2448 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				ABB5D6D02A7FD3920013A62E /* SingleImageViewController.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,7 +233,9 @@
 				ABBBA4142A54239B007BBEBE /* ImageListCell.swift in Sources */,
 				AB612B082A54142000A052EE /* ImageListPresenter.swift in Sources */,
 				AB612AEA2A4EB7D500A052EE /* AppDelegate.swift in Sources */,
+				ABB5D6CC2A7FB8960013A62E /* ProfileViewController.swift in Sources */,
 				AB612AEC2A4EB7D500A052EE /* SceneDelegate.swift in Sources */,
+				ABB5D6D12A7FD3920013A62E /* SingleImageViewController.swift in Sources */,
 				AB612B052A54095100A052EE /* UIColor+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

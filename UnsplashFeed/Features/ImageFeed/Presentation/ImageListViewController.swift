@@ -8,6 +8,7 @@
 import UIKit
 
 final class ImageListViewController: UIViewController {
+    private let singleImageViewIdentifier = "toSingleImageView"
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -22,6 +23,16 @@ final class ImageListViewController: UIViewController {
         tableView.register(
             UINib(nibName: ImageListCell.identifier, bundle: nil),
             forCellReuseIdentifier: ImageListCell.identifier)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case singleImageViewIdentifier:
+            let viewController = segue.destination as! SingleImageViewController
+            viewController.image = sender as? UIImage
+        default:
+            super.prepare(for: segue, sender: sender)
+        }
     }
 }
 
@@ -45,7 +56,10 @@ extension ImageListViewController: UITableViewDataSource {
 
 extension ImageListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        performSegue(
+            withIdentifier: singleImageViewIdentifier,
+            sender: UIImage(named: String(indexPath.row))
+        )
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
