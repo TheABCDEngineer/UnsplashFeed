@@ -8,6 +8,9 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     private var userImageView: UIImageView!
     private var userNameView: UILabel!
     private var userLinkView: UILabel!
