@@ -8,10 +8,6 @@
 import Foundation
 
 final class OAuth2Service: OAuth2ServiceProtocol {
-    init(repository: OAuth2TokenRepository) {
-        self.repository = repository
-    }
-    private let repository: OAuth2TokenRepository
     private struct AuthProperties {
         static let httpMethodPost = "POST"
         static let baseURL = URL(string: "https://unsplash.com")!
@@ -19,15 +15,14 @@ final class OAuth2Service: OAuth2ServiceProtocol {
     
     func fetchOAuthToken(
         _ code: String,
-        completion: @escaping (Error) -> Void
+        completion: @escaping (Result<String, Error>) -> Void
     ){
-        let task = provideSessionTask(for: code) { [weak self] result in
-            guard let self = self else { return }
+        let task = provideSessionTask(for: code) { result in
             switch result {
             case .success(let body):
-                self.repository.putToken(body.accessToken)
+                completion(.success(body.accessToken))
             case .failure(let error):
-                completion(error)
+                completion(.failure(error))
             }
         }
         task.resume()

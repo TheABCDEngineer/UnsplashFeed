@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7nm-oC-AIw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dcQ-GI-eGo">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -57,9 +57,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TbI-i6-gxh"/>
-                    <connections>
-                        <outlet property="loginButtonView" destination="ViB-ei-CB9" id="O8b-rl-v4x"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOW-Ax-QKs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -298,13 +295,39 @@
             </objects>
             <point key="canvasLocation" x="1884" y="116.74876847290641"/>
         </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="mhj-KP-xIa">
+            <objects>
+                <viewController id="dcQ-GI-eGo" customClass="SplashViewController" customModule="UnsplashFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s7W-mR-Ecc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaunchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="UtV-e5-Gbk">
+                                <rect key="frame" x="150" y="367" width="74" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="YP Black"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bi2-Ad-Pgq"/>
+                        <color key="backgroundColor" name="YP Black"/>
+                    </view>
+                    <connections>
+                        <segue destination="7nm-oC-AIw" kind="presentation" identifier="ShowAuthView" modalPresentationStyle="fullScreen" id="R6V-NL-6Pw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mp7-k7-dWu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5209" y="-185"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="cFv-Ll-Iay">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7nm-oC-AIw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ea0-ij-DRY">
-                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -319,6 +342,7 @@
     </scenes>
     <resources>
         <image name="11" width="200" height="300"/>
+        <image name="LaunchIcon" width="74" height="77"/>
         <image name="Logo" width="60" height="60"/>
         <image name="back_button_black" width="9" height="16"/>
         <image name="back_button_white" width="24" height="24"/>

@@ -1,6 +1,6 @@
 import Foundation
 
-class OAuth2TokenRepositoryImplUserDefaults: OAuth2TokenRepository {
+final class OAuth2TokenRepositoryImplUserDefaults: OAuth2TokenRepository {
     private let userDefaults = UserDefaults.standard
     private let tokenKey = "token"
     

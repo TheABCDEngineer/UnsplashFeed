@@ -31,6 +31,11 @@ final class WebViewController: UIViewController {
             context: nil)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), context: nil)
+    }
+    
     override func observeValue(
         forKeyPath keyPath: String?,
         of object: Any?,
@@ -43,11 +48,6 @@ final class WebViewController: UIViewController {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), context: nil)
-    }
 
     func setDelegate(_ delegate: WebViewControllerDelegate) {
         self.delegate = delegate
@@ -58,6 +58,7 @@ final class WebViewController: UIViewController {
     }
 }
 
+//MARK: - Private funcs
 private extension WebViewController {
     func updateProgress() {
         progressView.progress = Float(webView.estimatedProgress)
@@ -65,6 +66,7 @@ private extension WebViewController {
     }
 }
 
+//MARK: - WKNavigationDelegate
 extension WebViewController: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,

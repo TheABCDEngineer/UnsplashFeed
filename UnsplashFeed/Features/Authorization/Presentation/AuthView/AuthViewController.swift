@@ -14,18 +14,6 @@ final class AuthViewController: UIViewController {
     private let webViewIdentifier = "ShowWebView"
     private let mainControllerIndetifier = "TabBarViewController"
     private let presenter = Creator.createAuthViewPresenter()
-    @IBOutlet weak var loginButtonView: UIButton!
-        
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        loginButtonView.isHidden = true
-        if presenter.getAuthorizationStatus() {
-            switchToMainController()
-        } else {
-            print("loginButtonView.isHidden = false")
-            loginButtonView.isHidden = false
-        }
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
@@ -37,11 +25,12 @@ final class AuthViewController: UIViewController {
         }
     }
     
-    @IBAction func onLoginButtonClick() {
+    @IBAction private func onLoginButtonClick() {
         performSegue(withIdentifier: webViewIdentifier, sender: nil)
     }
 }
 
+//MARK: - Private funcs
 private extension AuthViewController {
     func switchToMainController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
@@ -49,14 +38,22 @@ private extension AuthViewController {
             .instantiateViewController(withIdentifier: mainControllerIndetifier)
         window.rootViewController = mainController
     }
+    
+    func onAuthorizationFalture(error: Error) {
+        //ошибка авторизации
+    }
 }
 
+//MARK: - WebViewControllerDelegate
 extension AuthViewController: WebViewControllerDelegate {
     func webViewController(_ viewController: WebViewController, authenticateWithCode code: String) {
-        if presenter.provideAuthorization(code: code) == nil {
-            switchToMainController()
-        } else {
-            //ошибка авторизации
+        presenter.provideAuthorization(code: code) { [weak self] error in
+            guard let self = self else { return }
+            guard let result = error else {
+                switchToMainController()
+                return
+            }
+            onAuthorizationFalture(error: result)
         }
     }
     
