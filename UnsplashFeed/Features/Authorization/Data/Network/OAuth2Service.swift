@@ -12,20 +12,30 @@ final class OAuth2Service: OAuth2ServiceProtocol {
         static let httpMethodPost = "POST"
         static let baseURL = URL(string: "https://unsplash.com")!
     }
+    private var task: URLSessionTask?
+    private var previousCode: String?
     
     func fetchOAuthToken(
         _ code: String,
         completion: @escaping (Result<String, Error>) -> Void
     ){
-        let task = provideSessionTask(for: code) { result in
+        assert(Thread.isMainThread)
+        if previousCode == code { return }
+        task?.cancel()
+        previousCode = code
+        
+        task = provideSessionTask(for: code) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let body):
                 completion(.success(body.accessToken))
             case .failure(let error):
                 completion(.failure(error))
+                self.previousCode = nil
             }
+            self.task = nil
         }
-        task.resume()
+        task?.resume()
     }
     
     private func createOAuthPath(code: String) -> String {

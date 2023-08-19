@@ -47,12 +47,15 @@ private extension AuthViewController {
 //MARK: - WebViewControllerDelegate
 extension AuthViewController: WebViewControllerDelegate {
     func webViewController(_ viewController: WebViewController, authenticateWithCode code: String) {
+        UIBlockingProgressHUD.show()
         presenter.provideAuthorization(code: code) { [weak self] error in
             guard let self = self else { return }
             guard let result = error else {
+                UIBlockingProgressHUD.dismiss()
                 switchToMainController()
                 return
             }
+            UIBlockingProgressHUD.dismiss()
             onAuthorizationFalture(error: result)
         }
     }
