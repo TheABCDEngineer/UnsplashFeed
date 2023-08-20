@@ -24,6 +24,6 @@ final class Creator {
     }
     
     static func createOAuth2TokenRepository() -> OAuth2TokenRepository {
-        return OAuth2TokenRepositoryImplUserDefaults()
+        return OAuth2TokenRepositoryImplKeychain()
     }
 }
