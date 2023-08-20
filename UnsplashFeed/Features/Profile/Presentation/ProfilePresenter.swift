@@ -12,15 +12,22 @@ final class ProfilePresenter {
     func getProfileInformation(
         completion: @escaping (Result<ProfileModel, Error>) -> Void
     ) {
-        profileService.fetchProfileProperties(token: tokenRepository.getToken())
-        { [weak self] result in
+        guard let token = tokenRepository.getToken() else {
+            completion(.failure(NetworkError.tokenError("Can't load token from repository")))
+            return
+        }
+        
+        profileService.fetchProfileProperties(token: token) { [weak self] result in
             guard let self else { return }
             switch result {
             
             case .success(let profile):
-                self.getProfileImageUrl(userName: profile.userName) { _result in
-                    var profileModel: ProfileModel?
-                    switch _result {
+                self.getProfileImageUrl(
+                    token: token,
+                    userName: profile.userName) { _result in
+                    
+                        var profileModel: ProfileModel?
+                        switch _result {
                         case .success(let stringUrl):
                             profileModel = DataConverter.swapToProfileModel(
                                 stringUrl,
@@ -32,9 +39,9 @@ final class ProfilePresenter {
                                 profile
                             )
                         }
-                    guard let profileModel else { fatalError("ProfileModel failed") }
-                    completion(.success(profileModel))
-                    }
+                        guard let profileModel else { fatalError("ProfileModel failed") }
+                        completion(.success(profileModel))
+                }
                 
             case .failure(let error):
                 completion(.failure(error))
@@ -43,11 +50,12 @@ final class ProfilePresenter {
     }
     
     private func getProfileImageUrl(
+        token: String,
         userName: String,
         completion: @escaping (Result<String?, Error>) -> Void
     ) {
         profileService.fetchProfileImageUrl(
-            token: tokenRepository.getToken(),
+            token: token,
             userName: userName,
             imageSizeAttribute: "small"
         ) { result in

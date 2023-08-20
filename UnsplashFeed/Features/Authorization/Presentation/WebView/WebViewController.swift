@@ -10,7 +10,8 @@ import WebKit
 
 final class WebViewController: UIViewController {
     private let presenter = Creator.createWebViewPresenter()
-    weak private var delegate: WebViewControllerDelegate?
+    private weak var delegate: WebViewControllerDelegate?
+    private var estimatedProgressObservation: NSKeyValueObservation?
     @IBOutlet weak private var webView: WKWebView!
     @IBOutlet weak private var progressView: UIProgressView!
    
@@ -24,31 +25,16 @@ final class WebViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        webView.addObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            options: .new,
-            context: nil)
+        estimatedProgressObservation = webView.observe(
+            \.estimatedProgress,
+            options: [],
+            changeHandler: { [weak self] _, _ in
+                guard let self = self else { return }
+                self.updateProgress()
+            }
+        )
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), context: nil)
-    }
-    
-    override func observeValue(
-        forKeyPath keyPath: String?,
-        of object: Any?,
-        change: [NSKeyValueChangeKey : Any]?,
-        context: UnsafeMutableRawPointer?
-    ) {
-        if keyPath == #keyPath(WKWebView.estimatedProgress) {
-            updateProgress()
-        } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
-    }
-
     func setDelegate(_ delegate: WebViewControllerDelegate) {
         self.delegate = delegate
     }
