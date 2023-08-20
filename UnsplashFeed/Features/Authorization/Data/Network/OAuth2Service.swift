@@ -40,9 +40,9 @@ final class OAuth2Service: OAuth2ServiceProtocol {
     
     private func createOAuthPath(code: String) -> String {
         return "/oauth/token"
-            + "?client_id=\(AccessKey)"
-            + "&&client_secret=\(SecretKey)"
-            + "&&redirect_uri=\(RedirectURI)"
+            + "?client_id=\(UnsplashApiParameters.AccessKey)"
+            + "&&client_secret=\(UnsplashApiParameters.SecretKey)"
+            + "&&redirect_uri=\(UnsplashApiParameters.RedirectURI)"
             + "&&code=\(code)"
             + "&&grant_type=authorization_code"
     }

@@ -1,6 +1,13 @@
 import Foundation
 
 final class Creator {
+    static func createProfilePresenter() -> ProfilePresenter {
+        return ProfilePresenter(
+            profileService: ProfileService(),
+            tokenRepository: createOAuth2TokenRepository()
+        )
+    }
+    
     static func createSplashViewPresenter() -> SplashViewPresenter {
         return SplashViewPresenter(tokenRepository: createOAuth2TokenRepository())
     }

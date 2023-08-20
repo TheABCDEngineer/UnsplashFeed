@@ -6,83 +6,103 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    private var userImageView: UIImageView!
-    private var userNameView: UILabel!
-    private var userLinkView: UILabel!
-    private var userSelfStatusView: UILabel!
+    private var userAvatarView: UIImageView!
+    private var profileNameView: UILabel!
+    private var loginNameView: UILabel!
+    private var profileBioView: UILabel!
     private var logoutButton: UIButton!
+    private let presenter = Creator.createProfilePresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .ypBlack
         configureLayout()
+        UIBlockingProgressHUD.show()
         
-        //будет пустым до авторизации и будет заменено реальными данными юзера после авторизации
-        userImageView.image = UIImage(named: "userImageMock")
-        userNameView.text = "Екатерина Новикова"
-        userLinkView.text = "@ekaterina_nov"
-        userSelfStatusView.text = "Hello, world!"
+        presenter.getProfileInformation { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let profile):
+                self.updateProfile(profile)
+                UIBlockingProgressHUD.dismiss()
+            case .failure(let error):
+                self.onLoadProfileError(error: error)
+                UIBlockingProgressHUD.dismiss()
+            }
+        }
     }
     
     @objc
     private func onLogoutButtonClick() {
      
     }
+    
+    private func updateProfile(_ model: ProfileModel) {
+        let processor = RoundCornerImageProcessor(cornerRadius: 100)
+        userAvatarView.kf.setImage(
+            with: model.avatarUrl,
+            placeholder: UIImage(systemName: "person.crop.circle.fill"),
+            options: [.processor(processor)]
+        )
+        profileNameView.text = model.name
+        loginNameView.text = model.loginName
+        profileBioView.text = model.bio
+    }
+    
+    private func onLoadProfileError(error: Error) {
+        //ошибка загрузки профиля пользователя
+    }
 }
 
+//MARK: - Config methods
 extension ProfileViewController {
     private func configureLayout() {
-        let userImageSupperView = UIImageView()
-        userImageSupperView.image = UIImage(systemName: "circle.fill")
-        userImageSupperView.tintColor = .ypWhite
-        userImageSupperView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(userImageSupperView)
-        userImageSupperView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        userImageSupperView.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        userImageSupperView.leadingAnchor.constraint(
-            equalTo: view.leadingAnchor,
-            constant: 16
+        userAvatarView = UIImageView()
+        userAvatarView.image = UIImage(systemName: "person.crop.circle.fill")
+        userAvatarView.tintColor = .ypGray
+        userAvatarView.backgroundColor = .ypWhite
+        userAvatarView.translatesAutoresizingMaskIntoConstraints = false
+        userAvatarView.layer.cornerRadius = 56
+        view.addSubview(userAvatarView)
+        userAvatarView.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        userAvatarView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        userAvatarView.leadingAnchor.constraint(
+                    equalTo: view.leadingAnchor,
+                    constant: 16
         ).isActive = true
-        userImageSupperView.topAnchor.constraint(
-            equalTo: view.topAnchor,
-            constant: 76
+        userAvatarView.topAnchor.constraint(
+                    equalTo: view.topAnchor,
+                    constant: 76
         ).isActive = true
         
-        userImageView = UIImageView()
-        userImageView.image = UIImage(systemName: "person.crop.circle.fill")
-        userImageView.tintColor = .ypGray
-        userImageView.translatesAutoresizingMaskIntoConstraints = false
-        userImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        userImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        userImageSupperView.addSubview(userImageView)
-        
-        userNameView = UILabel()
+        profileNameView = UILabel()
         initUserPropertyLabel(
-            label: userNameView,
+            label: profileNameView,
             textColor: .ypWhite,
             font: .boldSystemFont(ofSize: 23),
-            previousLabelBottomAnchor: userImageSupperView.bottomAnchor
+            previousLabelBottomAnchor: userAvatarView.bottomAnchor
         )
         
-        userLinkView = UILabel()
+        loginNameView = UILabel()
         initUserPropertyLabel(
-            label: userLinkView,
+            label: loginNameView,
             textColor: .ypGray,
             font: .systemFont(ofSize: 13),
-            previousLabelBottomAnchor: userNameView.bottomAnchor
+            previousLabelBottomAnchor: profileNameView.bottomAnchor
         )
         
-        userSelfStatusView = UILabel()
+        profileBioView = UILabel()
         initUserPropertyLabel(
-            label: userSelfStatusView,
+            label: profileBioView,
             textColor: .ypWhite,
             font: .systemFont(ofSize: 13),
-            previousLabelBottomAnchor: userLinkView.bottomAnchor
+            previousLabelBottomAnchor: loginNameView.bottomAnchor
         )
         
         logoutButton = UIButton.systemButton(
@@ -100,7 +120,7 @@ extension ProfileViewController {
             constant: -24
         ).isActive = true
         logoutButton.centerYAnchor.constraint(
-            equalTo: userImageSupperView.centerYAnchor
+            equalTo: userAvatarView.centerYAnchor
         ).isActive = true
     }
     
