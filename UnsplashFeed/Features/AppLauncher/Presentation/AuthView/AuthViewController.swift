@@ -11,8 +11,11 @@ final class AuthViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    private weak var appLauncherDelegate: AppLauncherProtocol?
+    
     private let webViewIdentifier = "ShowWebView"
     private let mainControllerIndetifier = "TabBarViewController"
+    
     private let presenter = Creator.createAuthViewPresenter()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -25,6 +28,10 @@ final class AuthViewController: UIViewController {
         }
     }
     
+    func setDelegate(_ delegate: AppLauncherProtocol) {
+        self.appLauncherDelegate = delegate
+    }
+    
     @IBAction private func onLoginButtonClick() {
         performSegue(withIdentifier: webViewIdentifier, sender: nil)
     }
@@ -32,13 +39,6 @@ final class AuthViewController: UIViewController {
 
 //MARK: - Private funcs
 private extension AuthViewController {
-    func switchToMainController() {
-        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
-        let mainController = UIStoryboard(name: "Main", bundle: .main)
-            .instantiateViewController(withIdentifier: mainControllerIndetifier)
-        window.rootViewController = mainController
-    }
-    
     func onAuthorizationFalture(error: Error) {
         //ошибка авторизации
     }
@@ -52,7 +52,8 @@ extension AuthViewController: WebViewControllerDelegate {
             guard let self = self else { return }
             guard let result = error else {
                 UIBlockingProgressHUD.dismiss()
-                switchToMainController()
+                //self.delegate?.switchToMainController()
+                self.appLauncherDelegate?.loadProfile()
                 return
             }
             UIBlockingProgressHUD.dismiss()

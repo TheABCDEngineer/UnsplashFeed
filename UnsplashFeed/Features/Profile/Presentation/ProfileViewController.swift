@@ -17,24 +17,21 @@ final class ProfileViewController: UIViewController {
     private var loginNameView: UILabel!
     private var profileBioView: UILabel!
     private var logoutButton: UIButton!
+    
     private let presenter = Creator.createProfilePresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .ypBlack
         configureLayout()
-        UIBlockingProgressHUD.show()
         
-        presenter.getProfileInformation { [weak self] result in
+        updateProfileProperties(
+            presenter.getProfileInformation()
+        )
+        
+        presenter.provideProfileAvatar{ [weak self] url in
             guard let self else { return }
-            switch result {
-            case .success(let profile):
-                self.updateProfile(profile)
-                UIBlockingProgressHUD.dismiss()
-            case .failure(let error):
-                self.onLoadProfileError(error: error)
-                UIBlockingProgressHUD.dismiss()
-            }
+            self.updateProfileAvatar(for: url)
         }
     }
     
@@ -43,20 +40,24 @@ final class ProfileViewController: UIViewController {
      
     }
     
-    private func updateProfile(_ model: ProfileModel) {
-        let processor = RoundCornerImageProcessor(cornerRadius: 100)
-        userAvatarView.kf.setImage(
-            with: model.avatarUrl,
-            placeholder: UIImage(systemName: "person.crop.circle.fill"),
-            options: [.processor(processor)]
-        )
+    private func updateProfileProperties(_ model: ProfilePropertiesModel) {
         profileNameView.text = model.name
         loginNameView.text = model.loginName
         profileBioView.text = model.bio
     }
     
-    private func onLoadProfileError(error: Error) {
-        //ошибка загрузки профиля пользователя
+    private func updateProfileAvatar(for url: URL?) {
+//        let cache = ImageCache.default
+//        cache.clearMemoryCache()
+//        cache.clearDiskCache()
+        userAvatarView.layer.cornerRadius = 20
+        let processor = RoundCornerImageProcessor(cornerRadius: 100)
+        userAvatarView.kf.setImage(
+            with: url,
+            placeholder: UIImage(systemName: "person.crop.circle.fill"),
+            options: [.processor(processor)]
+        )
+        userAvatarView.layer.cornerRadius = 20
     }
 }
 
