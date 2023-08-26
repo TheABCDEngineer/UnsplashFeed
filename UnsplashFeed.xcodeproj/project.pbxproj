@@ -25,7 +25,6 @@
 		AB8884EB2A912D8A0082FA6B /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8884EA2A912D8A0082FA6B /* ProfileService.swift */; };
 		AB8884EE2A913CC20082FA6B /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8884ED2A913CC20082FA6B /* ProfilePresenter.swift */; };
 		AB8884F02A9148CD0082FA6B /* ProfileImageResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8884EF2A9148CD0082FA6B /* ProfileImageResponseBody.swift */; };
-		AB8884F22A914E330082FA6B /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8884F12A914E330082FA6B /* ProfileModel.swift */; };
 		AB8884F42A9150040082FA6B /* URLSessionServise.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8884F32A9150040082FA6B /* URLSessionServise.swift */; };
 		AB8884F72A9238100082FA6B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AB8884F62A9238100082FA6B /* Kingfisher */; };
 		ABA969242A87CB6E00581EA5 /* WebViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA969232A87CB6E00581EA5 /* WebViewControllerDelegate.swift */; };
@@ -54,6 +53,7 @@
 		ABE529F42A97F67000C711C8 /* AlertDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE529F32A97F67000C711C8 /* AlertDialog.swift */; };
 		ABE529F72A97F74400C711C8 /* AlertPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE529F62A97F74400C711C8 /* AlertPresenterProtocol.swift */; };
 		ABE529FA2A97F8B100C711C8 /* AlertDialogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE529F92A97F8B100C711C8 /* AlertDialogModel.swift */; };
+		ABE529FC2A9A6AD500C711C8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE529FB2A9A6AD500C711C8 /* TabBarController.swift */; };
 		ABF0A22E2A879F0D003F2448 /* UnsplashApiParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF0A22D2A879F0D003F2448 /* UnsplashApiParameters.swift */; };
 		ABF0A2312A87BA64003F2448 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF0A2302A87BA64003F2448 /* AuthViewController.swift */; };
 /* End PBXBuildFile section */
@@ -78,7 +78,6 @@
 		AB8884EA2A912D8A0082FA6B /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		AB8884ED2A913CC20082FA6B /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		AB8884EF2A9148CD0082FA6B /* ProfileImageResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageResponseBody.swift; sourceTree = "<group>"; };
-		AB8884F12A914E330082FA6B /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		AB8884F32A9150040082FA6B /* URLSessionServise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionServise.swift; sourceTree = "<group>"; };
 		ABA969232A87CB6E00581EA5 /* WebViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerDelegate.swift; sourceTree = "<group>"; };
 		ABA9692A2A88C67B00581EA5 /* OAuth2TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenRepository.swift; sourceTree = "<group>"; };
@@ -105,6 +104,7 @@
 		ABE529F32A97F67000C711C8 /* AlertDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialog.swift; sourceTree = "<group>"; };
 		ABE529F62A97F74400C711C8 /* AlertPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenterProtocol.swift; sourceTree = "<group>"; };
 		ABE529F92A97F8B100C711C8 /* AlertDialogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialogModel.swift; sourceTree = "<group>"; };
+		ABE529FB2A9A6AD500C711C8 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		ABF0A22D2A879F0D003F2448 /* UnsplashApiParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashApiParameters.swift; sourceTree = "<group>"; };
 		ABF0A2302A87BA64003F2448 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -210,7 +210,6 @@
 			isa = PBXGroup;
 			children = (
 				AB8884E32A9129730082FA6B /* ProfilePropertiesModel.swift */,
-				AB8884F12A914E330082FA6B /* ProfileModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -250,6 +249,7 @@
 				ABA969292A88C55A00581EA5 /* Repository */,
 				ABA969272A88C4F700581EA5 /* Data */,
 				ABA969442A89059700581EA5 /* Creator.swift */,
+				ABE529FB2A9A6AD500C711C8 /* TabBarController.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -527,7 +527,6 @@
 				ABA9692B2A88C67B00581EA5 /* OAuth2TokenRepository.swift in Sources */,
 				AB8884E62A912A170082FA6B /* DataConverter.swift in Sources */,
 				ABBBA4142A54239B007BBEBE /* ImageListCell.swift in Sources */,
-				AB8884F22A914E330082FA6B /* ProfileModel.swift in Sources */,
 				ABF0A2312A87BA64003F2448 /* AuthViewController.swift in Sources */,
 				AB612B082A54142000A052EE /* ImageListPresenter.swift in Sources */,
 				AB8884EB2A912D8A0082FA6B /* ProfileService.swift in Sources */,
@@ -540,6 +539,7 @@
 				AB8884F02A9148CD0082FA6B /* ProfileImageResponseBody.swift in Sources */,
 				ABA969342A88D44200581EA5 /* WebViewPresenter.swift in Sources */,
 				ABA969432A89053500581EA5 /* OAuth2ServiceProtocol.swift in Sources */,
+				ABE529FC2A9A6AD500C711C8 /* TabBarController.swift in Sources */,
 				ABA9694A2A8ABBE700581EA5 /* SplashViewController.swift in Sources */,
 				AB8884E42A9129730082FA6B /* ProfilePropertiesModel.swift in Sources */,
 				ABB5D6D12A7FD3920013A62E /* SingleImageViewController.swift in Sources */,

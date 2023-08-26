@@ -4,9 +4,14 @@ final class SplashViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    private let authViewIdentifier = "ShowAuthView"
+    private let authViewIdentifier = "AuthViewController"
     private let mainControllerIndetifier = "TabBarViewController"
     private let presenter = Creator.createSplashViewPresenter()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureLayout()
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -14,22 +19,7 @@ final class SplashViewController: UIViewController {
         if presenter.getAuthorizationStatus() {
             loadProfile()
         } else {
-            performSegue(withIdentifier: authViewIdentifier, sender: nil)
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case authViewIdentifier:
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else { fatalError("Failed to \(authViewIdentifier)") }
-            
-            viewController.setDelegate(self)
-            
-        default:
-            super.prepare(for: segue, sender: sender)
+            switchToAuthController()
         }
     }
 }
@@ -60,6 +50,30 @@ extension SplashViewController: AppLauncherProtocol {
 }
 
 private extension SplashViewController {
+    func configureLayout() {
+        view.backgroundColor = .ypBlack
+        let launchImage = UIImageView()
+        launchImage.image = UIImage(named: "LaunchIcon")
+        launchImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(launchImage)
+        
+        launchImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        launchImage.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    func switchToAuthController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        
+        guard let authViewController = storyboard.instantiateViewController(
+            withIdentifier: authViewIdentifier
+        ) as? AuthViewController else { fatalError("Can't create AuthViewController")}
+        
+        authViewController.modalPresentationStyle = .fullScreen
+        authViewController.setDelegate(self)
+        self.present(authViewController, animated: true)
+    }
+    
     func onLoadProfileFailure(with error: Error) {
         
     }
