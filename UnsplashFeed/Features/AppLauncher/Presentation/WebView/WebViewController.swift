@@ -63,6 +63,7 @@ extension WebViewController: WKNavigationDelegate {
             presenter.handleNavigationAction(url: navigationAction.request.url) { [weak self] code in
                 guard let self = self else { return }
                 self.delegate?.webViewController(self, authenticateWithCode: code)
+                self.dismiss(animated: true)
             }
         )
     }

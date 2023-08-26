@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 final class AuthViewPresenter {
     private let authService: OAuth2ServiceProtocol
@@ -26,5 +26,17 @@ final class AuthViewPresenter {
                 completion(error)
             }
         }
+    }
+    
+    func createAuthorizationFaltureAlertDialog(
+        errorDescription: String,
+        completion: @escaping (UIAlertAction) -> Void
+    ) -> AlertDialogModel {
+        return AlertDialogModel(
+            title: "Что-то пошло не так(",
+            message: "Не удалось войти в систему\n\(errorDescription)",
+            buttonTitle: "Ok",
+            completion: completion
+        )
     }
 }

@@ -40,7 +40,12 @@ final class AuthViewController: UIViewController {
 //MARK: - Private funcs
 private extension AuthViewController {
     func onAuthorizationFalture(error: Error) {
-        //ошибка авторизации
+        AlertDialog.showAlert(
+            self,
+            model: presenter.createAuthorizationFaltureAlertDialog(
+                errorDescription: error.localizedDescription
+            ) { _ in}
+        )
     }
 }
 
@@ -48,11 +53,11 @@ private extension AuthViewController {
 extension AuthViewController: WebViewControllerDelegate {
     func webViewController(_ viewController: WebViewController, authenticateWithCode code: String) {
         UIBlockingProgressHUD.show()
+        
         presenter.provideAuthorization(code: code) { [weak self] error in
             guard let self = self else { return }
             guard let result = error else {
                 UIBlockingProgressHUD.dismiss()
-                //self.delegate?.switchToMainController()
                 self.appLauncherDelegate?.loadProfile()
                 return
             }
@@ -63,5 +68,12 @@ extension AuthViewController: WebViewControllerDelegate {
     
     func webViewControllerCancel(_ viewController: WebViewController) {
         dismiss(animated: true)
+    }
+}
+
+//MARK: - AlertPresenterProtocol
+extension AuthViewController: AlertPresenterProtocol {
+    func present(_ alert: UIAlertController) {
+        self.present(alert, animated: true)
     }
 }

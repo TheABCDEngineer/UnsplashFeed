@@ -51,6 +51,9 @@
 		ABE529EC2A9518F500C711C8 /* AppLauncherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE529EB2A9518F500C711C8 /* AppLauncherProtocol.swift */; };
 		ABE529EF2A9520FF00C711C8 /* ProfileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE529EE2A9520FF00C711C8 /* ProfileLoader.swift */; };
 		ABE529F12A955B0E00C711C8 /* ProfileLoaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE529F02A955B0E00C711C8 /* ProfileLoaderProtocol.swift */; };
+		ABE529F42A97F67000C711C8 /* AlertDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE529F32A97F67000C711C8 /* AlertDialog.swift */; };
+		ABE529F72A97F74400C711C8 /* AlertPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE529F62A97F74400C711C8 /* AlertPresenterProtocol.swift */; };
+		ABE529FA2A97F8B100C711C8 /* AlertDialogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE529F92A97F8B100C711C8 /* AlertDialogModel.swift */; };
 		ABF0A22E2A879F0D003F2448 /* UnsplashApiParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF0A22D2A879F0D003F2448 /* UnsplashApiParameters.swift */; };
 		ABF0A2312A87BA64003F2448 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF0A2302A87BA64003F2448 /* AuthViewController.swift */; };
 /* End PBXBuildFile section */
@@ -99,6 +102,9 @@
 		ABE529EB2A9518F500C711C8 /* AppLauncherProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncherProtocol.swift; sourceTree = "<group>"; };
 		ABE529EE2A9520FF00C711C8 /* ProfileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoader.swift; sourceTree = "<group>"; };
 		ABE529F02A955B0E00C711C8 /* ProfileLoaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoaderProtocol.swift; sourceTree = "<group>"; };
+		ABE529F32A97F67000C711C8 /* AlertDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialog.swift; sourceTree = "<group>"; };
+		ABE529F62A97F74400C711C8 /* AlertPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenterProtocol.swift; sourceTree = "<group>"; };
+		ABE529F92A97F8B100C711C8 /* AlertDialogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialogModel.swift; sourceTree = "<group>"; };
 		ABF0A22D2A879F0D003F2448 /* UnsplashApiParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashApiParameters.swift; sourceTree = "<group>"; };
 		ABF0A2302A87BA64003F2448 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -350,9 +356,36 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		ABE529F22A97F5F000C711C8 /* AlertDialog */ = {
+			isa = PBXGroup;
+			children = (
+				ABE529F82A97F88900C711C8 /* Model */,
+				ABE529F52A97F6FF00C711C8 /* Protocols */,
+				ABE529F32A97F67000C711C8 /* AlertDialog.swift */,
+			);
+			path = AlertDialog;
+			sourceTree = "<group>";
+		};
+		ABE529F52A97F6FF00C711C8 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				ABE529F62A97F74400C711C8 /* AlertPresenterProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		ABE529F82A97F88900C711C8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ABE529F92A97F8B100C711C8 /* AlertDialogModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		ABF0A2252A824CA5003F2448 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				ABE529F22A97F5F000C711C8 /* AlertDialog */,
 				ABF0A22F2A87A1C5003F2448 /* AppLauncher */,
 				AB612B062A54139400A052EE /* ImageFeed */,
 				ABB5D6CA2A7FB81A0013A62E /* Profile */,
@@ -483,6 +516,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABE529F12A955B0E00C711C8 /* ProfileLoaderProtocol.swift in Sources */,
+				ABE529F72A97F74400C711C8 /* AlertPresenterProtocol.swift in Sources */,
+				ABE529FA2A97F8B100C711C8 /* AlertDialogModel.swift in Sources */,
 				ABA9694C2A8ABEB600581EA5 /* SplashViewPresenter.swift in Sources */,
 				ABE529EC2A9518F500C711C8 /* AppLauncherProtocol.swift in Sources */,
 				ABA9693F2A88F18400581EA5 /* URLSession+Extensions.swift in Sources */,
@@ -510,6 +545,7 @@
 				ABB5D6D12A7FD3920013A62E /* SingleImageViewController.swift in Sources */,
 				ABA969382A88EBCB00581EA5 /* OAuthResponceBody.swift in Sources */,
 				AB8884E12A91278B0082FA6B /* ProfilePropertiesResponseBody.swift in Sources */,
+				ABE529F42A97F67000C711C8 /* AlertDialog.swift in Sources */,
 				AB8884DD2A8D67810082FA6B /* UIBlockingProgressHUD.swift in Sources */,
 				ABA969412A89049300581EA5 /* AuthViewPresenter.swift in Sources */,
 				ABE529EA2A93BECE00C711C8 /* ProfileRepositoryImplSingleton.swift in Sources */,
