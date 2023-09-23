@@ -12,10 +12,7 @@ final class AuthViewController: UIViewController {
         return .lightContent
     }
     private weak var appLauncherDelegate: AppLauncherProtocol?
-    
     private let webViewIdentifier = "ShowWebView"
-    private let mainControllerIndetifier = "TabBarViewController"
-    
     private let presenter = Creator.createAuthViewPresenter()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

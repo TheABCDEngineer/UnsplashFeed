@@ -2,7 +2,7 @@ import Foundation
 
 final class Creator {
     
-//MARK: Presenters injections
+//MARK: - Presenters injections
     static func createProfilePresenter() -> ProfilePresenter {
         return ProfilePresenter(
             profileRepository: injectProfileRepository()

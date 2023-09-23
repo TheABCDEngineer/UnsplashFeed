@@ -47,17 +47,13 @@ final class ProfileViewController: UIViewController {
     }
     
     private func updateProfileAvatar(for url: URL?) {
-//        let cache = ImageCache.default
-//        cache.clearMemoryCache()
-//        cache.clearDiskCache()
-        userAvatarView.layer.cornerRadius = 20
-        let processor = RoundCornerImageProcessor(cornerRadius: 100)
+        let processor = RoundCornerImageProcessor(cornerRadius: 40)
         userAvatarView.kf.setImage(
             with: url,
             placeholder: UIImage(systemName: "person.crop.circle.fill"),
             options: [.processor(processor)]
         )
-        userAvatarView.layer.cornerRadius = 20
+        userAvatarView.layer.cornerRadius = 40
     }
 }
 

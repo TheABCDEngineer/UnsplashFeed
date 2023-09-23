@@ -7,6 +7,7 @@ final class SplashViewController: UIViewController {
     private let authViewIdentifier = "AuthViewController"
     private let mainControllerIndetifier = "TabBarViewController"
     private let presenter = Creator.createSplashViewPresenter()
+    private var isViewAllreadyAppeared = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,8 +18,9 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if presenter.getAuthorizationStatus() {
-            loadProfile()
+            if !isViewAllreadyAppeared { loadProfile() }
         } else {
+            isViewAllreadyAppeared = true
             switchToAuthController()
         }
     }
