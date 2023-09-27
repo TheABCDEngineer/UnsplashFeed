@@ -15,12 +15,12 @@ final class WebViewPresenter {
     }
     
     func getWebUrl() -> URL {
-        var urlComponents = URLComponents(string: UnsplashAuthorizeURLString)!
+        var urlComponents = URLComponents(string: UnsplashApiParameters.AuthorizeURLString)!
         urlComponents.queryItems = [
-           URLQueryItem(name: "client_id", value: AccessKey),
-           URLQueryItem(name: "redirect_uri", value: RedirectURI),
-           URLQueryItem(name: "response_type", value: WebAuthValue.code),
-           URLQueryItem(name: "scope", value: AccessScope)
+            URLQueryItem(name: "client_id", value: UnsplashApiParameters.AccessKey),
+            URLQueryItem(name: "redirect_uri", value: UnsplashApiParameters.RedirectURI),
+            URLQueryItem(name: "response_type", value: WebAuthValue.code),
+            URLQueryItem(name: "scope", value: UnsplashApiParameters.AccessScope)
          ]
         return urlComponents.url!
     }

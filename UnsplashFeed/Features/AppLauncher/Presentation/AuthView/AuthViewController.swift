@@ -11,8 +11,8 @@ final class AuthViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    private weak var appLauncherDelegate: AppLauncherProtocol?
     private let webViewIdentifier = "ShowWebView"
-    private let mainControllerIndetifier = "TabBarViewController"
     private let presenter = Creator.createAuthViewPresenter()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -25,6 +25,10 @@ final class AuthViewController: UIViewController {
         }
     }
     
+    func setDelegate(_ delegate: AppLauncherProtocol) {
+        self.appLauncherDelegate = delegate
+    }
+    
     @IBAction private func onLoginButtonClick() {
         performSegue(withIdentifier: webViewIdentifier, sender: nil)
     }
@@ -32,32 +36,41 @@ final class AuthViewController: UIViewController {
 
 //MARK: - Private funcs
 private extension AuthViewController {
-    func switchToMainController() {
-        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
-        let mainController = UIStoryboard(name: "Main", bundle: .main)
-            .instantiateViewController(withIdentifier: mainControllerIndetifier)
-        window.rootViewController = mainController
-    }
-    
     func onAuthorizationFalture(error: Error) {
-        //ошибка авторизации
+        AlertDialog.showAlert(
+            self,
+            model: presenter.createAuthorizationFaltureAlertDialog(
+                errorDescription: error.localizedDescription
+            ) { _ in}
+        )
     }
 }
 
 //MARK: - WebViewControllerDelegate
 extension AuthViewController: WebViewControllerDelegate {
     func webViewController(_ viewController: WebViewController, authenticateWithCode code: String) {
+        UIBlockingProgressHUD.show()
+        
         presenter.provideAuthorization(code: code) { [weak self] error in
             guard let self = self else { return }
             guard let result = error else {
-                switchToMainController()
+                UIBlockingProgressHUD.dismiss()
+                self.appLauncherDelegate?.loadProfile()
                 return
             }
+            UIBlockingProgressHUD.dismiss()
             onAuthorizationFalture(error: result)
         }
     }
     
     func webViewControllerCancel(_ viewController: WebViewController) {
         dismiss(animated: true)
+    }
+}
+
+//MARK: - AlertPresenterProtocol
+extension AuthViewController: AlertPresenterProtocol {
+    func present(_ alert: UIAlertController) {
+        self.present(alert, animated: true)
     }
 }
