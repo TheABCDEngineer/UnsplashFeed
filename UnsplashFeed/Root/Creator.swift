@@ -26,22 +26,35 @@ final class Creator {
             tokenRepository: injectOAuth2TokenRepository()
         )
     }
+    
+    static func createImageListPresenter() -> ImageListPresenter {
+        return ImageListPresenter(
+            photoFactory: injectPhotoFactoryProtocol()
+        )
+    }
 }
 
-//MARK: - Protocols injections
+//MARK: - Repositories injections
 extension Creator {
     static func injectOAuth2TokenRepository() -> OAuth2TokenRepository {
         return OAuth2TokenRepositoryImplKeychain()
     }
     
+    static func injectProfileRepository() -> ProfileRepository {
+        return ProfileRepositoryImplSingleton.shared
+    }
+    
+    static func injectPhotoRepository() -> PhotoRepository {
+        return PhotoRepositoryImplNetwork()
+    }
+}
+
+//MARK: - Protocols injections
+extension Creator {
     static func injectOAuth2ServiceProtocol() -> OAuth2ServiceProtocol {
         return OAuth2Service()
     }
     
-    static func injectProfileRepository() -> ProfileRepository {
-        return ProfileRepositoryImplSingleton.shared
-    }
- 
     static func injectProfileServiceProtocol() -> ProfileServiceProtocol{
         return ProfileService()
     }
@@ -57,6 +70,13 @@ extension Creator {
         )
         ProfileLoader.shared = profileLoader
         return ProfileLoader.shared!
+    }
+    
+    static func injectPhotoFactoryProtocol() -> PhotoFactoryProtocol {
+        return PhotoFactory(
+            photosRepository: injectPhotoRepository(),
+            tokenRepository: injectOAuth2TokenRepository()
+        )
     }
 }
 
