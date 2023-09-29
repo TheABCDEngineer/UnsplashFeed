@@ -6,15 +6,17 @@
 //
 
 import UIKit
+import Kingfisher
+import ProgressHUD
 
 final class SingleImageViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    var image: UIImage? {
+    var imageStringUrl: String? {
         didSet {
             if isViewLoaded {
-                initImage(self.image)
+                initImage(self.imageStringUrl)
             }
         }
     }
@@ -24,13 +26,23 @@ final class SingleImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
-        initImage(self.image)
+        initImage(self.imageStringUrl)
     }
     
-    private func initImage(_ image: UIImage?) {
-        imageView.image = image
-        if image == nil { return }
-        configureScrollView(imageSize: image!.size)
+    private func initImage(_ stringUrl: String?) {
+        if stringUrl == nil { return }
+        ProgressHUD.show()
+        
+        let url = URL(string: stringUrl!)
+        imageView.kf.setImage(
+            with: url,
+            completionHandler: { [weak self] _ in
+                guard let self else { return }
+                let imageSize = self.imageView.image?.size ?? CGSize(width: 1, height: 1)
+                self.configureScrollView(imageSize: imageSize)
+                ProgressHUD.dismiss()
+            }
+        )
     }
     
     private func configureScrollView(imageSize: CGSize) {
@@ -55,7 +67,7 @@ final class SingleImageViewController: UIViewController {
     }
     
     @IBAction private func onShareButtonClick() {
-        guard let image = self.image else { return }
+        guard let image = self.imageView.image else { return }
         let share = UIActivityViewController(
             activityItems: [image],
             applicationActivities: nil
