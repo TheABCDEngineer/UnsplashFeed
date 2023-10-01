@@ -20,7 +20,8 @@ final class ProfileLoader: ProfileLoaderProtocol {
     func loadProfileInformation(
         completion: @escaping (Result<ProfilePropertiesModel, Error>) -> Void
     ) {
-        guard let token = tokenRepository.getToken() else {
+        let token = self.tokenRepository.getToken()
+        if token.isEmpty {
             completion(.failure(NetworkError.tokenError("Can't load token from repository")))
             return
         }
@@ -39,7 +40,8 @@ final class ProfileLoader: ProfileLoaderProtocol {
         profile: ProfilePropertiesModel,
         completion: @escaping (Result<URL?, Error>) -> Void
     ) {
-        guard let token = tokenRepository.getToken() else {
+        let token = self.tokenRepository.getToken()
+        if token.isEmpty {
             completion(.failure(NetworkError.tokenError("Can't load token from repository")))
             return
         }

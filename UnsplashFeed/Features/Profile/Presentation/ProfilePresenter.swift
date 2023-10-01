@@ -2,10 +2,15 @@ import Foundation
 
 final class ProfilePresenter {
     private let profileRepository: ProfileRepository
+    private let tokenRepository: OAuth2TokenRepository
     private var profileLoaderObserver: NSObjectProtocol?
     
-    init(profileRepository: ProfileRepository) {
+    init(
+        profileRepository: ProfileRepository,
+        tokenRepository: OAuth2TokenRepository
+    ) {
         self.profileRepository = profileRepository
+        self.tokenRepository = tokenRepository
     }
     
     func getProfileInformation() -> ProfilePropertiesModel {
@@ -32,6 +37,22 @@ final class ProfilePresenter {
             }
         completion(
             profileRepository.avatarUrl
+        )
+    }
+    
+    func onProfileLogout(completion: @escaping () -> Void) -> AlertDialogModel {
+        return AlertDialog.createDialogModel(
+            title: "Пока, пока!",
+            message: "Уверены, что хотите выйти?",
+            applyTitle: "Да",
+            cancelTitle: "Нет",
+            applyAction: { [weak self] _ in
+                guard let self else { return }
+                self.tokenRepository.removeToken()
+                Creator.cleanWebCookies()
+                completion()
+            },
+            cancelAction: { _ in}
         )
     }
 }

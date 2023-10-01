@@ -1,11 +1,13 @@
 import Foundation
+import WebKit
 
 final class Creator {
     
 //MARK: - Presenters injections
     static func createProfilePresenter() -> ProfilePresenter {
         return ProfilePresenter(
-            profileRepository: injectProfileRepository()
+            profileRepository: injectProfileRepository(),
+            tokenRepository: injectOAuth2TokenRepository()
         )
     }
     
@@ -90,4 +92,22 @@ extension Creator {
 //MARK: - Notification Names
 extension Creator {
     static let OnProfileAvatarUrlDidLoad = Notification.Name(rawValue: "OnProfileAvatarUrlDidLoad")
+}
+
+//MARK: - Clean Cookies
+extension Creator {
+    static func cleanWebCookies() {
+       HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+       WKWebsiteDataStore.default().fetchDataRecords(
+        ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()
+       ) { records in
+          records.forEach { record in
+             WKWebsiteDataStore.default().removeData(
+                ofTypes: record.dataTypes,
+                for: [record],
+                completionHandler: {}
+             )
+          }
+       }
+    }
 }

@@ -12,10 +12,9 @@ final class SplashViewPresenter {
     }
     
     func getAuthorizationStatus() -> Bool {
-        if let _ = tokenRepository.getToken() {
-            return true
-        }
-        return false
+        let token = tokenRepository.getToken()
+        if token.isEmpty { return false }
+        return true
     }
     
     func loadProfile(

@@ -17,7 +17,8 @@ final class FavoritesRepositoryImplNetwork: FavoritesRepository {
         onFailure: @escaping (NetworkError) -> Void
     ) {
         let httpMethod = isLike ? HttpMethod.POST : HttpMethod.DELETE
-        guard let token = self.tokenRepository.getToken() else {
+        let token = self.tokenRepository.getToken()
+        if token.isEmpty {
             onFailure(.tokenError("Token not found in storage"))
             return
         }

@@ -92,11 +92,11 @@ private extension ImageListPresenter {
         with error: NetworkError,
         _ callback: @escaping () -> Void
     ) {
-        let errorAlertModel = AlertDialogModel(
+        let errorAlertModel = AlertDialog.createDialogModel(
             title: "Не удаётся загрузить фотографии",
             message: getErrorDescription(from: error),
-            buttonTitle: "Ok",
-            completion: { _ in
+            applyTitle: "Ok",
+            applyAction: { _ in
                 callback()
             }
         )
@@ -107,11 +107,11 @@ private extension ImageListPresenter {
         with error: NetworkError,
         _ callback: @escaping () -> Void
     ) {
-        let errorAlertModel = AlertDialogModel(
+        let errorAlertModel = AlertDialog.createDialogModel(
             title: "Не удаётся лайкнуть фотографию",
             message: getErrorDescription(from: error),
-            buttonTitle: "Ok",
-            completion: { _ in
+            applyTitle: "Ok",
+            applyAction: { _ in
                 callback()
             }
         )
