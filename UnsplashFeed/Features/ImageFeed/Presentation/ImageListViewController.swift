@@ -81,6 +81,8 @@ extension ImageListViewController: UITableViewDataSource {
         ) as? ImageListCell else {
             return UITableViewCell()
         }
+        cell.setDelegate(self)
+        cell.setRow(indexPath.row)
         
         if photos.count - indexPath.row == 3 { presenter.getPhotosNextPage() }
         
@@ -118,5 +120,23 @@ extension ImageListViewController: UITableViewDelegate {
 extension ImageListViewController: AlertPresenterProtocol {
     func present(_ alert: UIAlertController) {
         self.present(alert, animated: true)
+    }
+}
+
+//MARK: - ImageListCellDelegate
+extension ImageListViewController: ImageListCellDelegate {
+    func changeLike(for photoModelNumber: Int, _ completion: @escaping (Bool) -> Void) {
+        let photoModelUnknownFavoritesState = presenter.rebuildPhotoModel(
+            model: photos[photoModelNumber],
+            isLiked: nil
+        )
+        
+        presenter.changeLike(for: photos[photoModelNumber]) { [weak self] photoModel in
+            guard let self else { return }
+            self.photos[photoModelNumber] = photoModel
+            completion(photoModel.isLiked ?? false)
+        }
+        
+        photos[photoModelNumber] = photoModelUnknownFavoritesState
     }
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 final class PhotoRepositoryImplNetwork: PhotoRepository {
-    private let urlSessionService = URLSessionServise()
+    private let urlSessionService = URLSessionService()
 
     func fetchPhotosNextPage(
         page: Int,

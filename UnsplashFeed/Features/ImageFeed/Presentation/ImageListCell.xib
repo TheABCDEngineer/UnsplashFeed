@@ -17,9 +17,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="298"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pxx-qn-qF8" userLabel="Image">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Pxx-qn-qF8" userLabel="Image">
                         <rect key="frame" x="16" y="0.0" width="343" height="290"/>
                         <color key="backgroundColor" name="YP Gray"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="16"/>
@@ -59,11 +60,20 @@
                             <action selector="onFavoritesButtonClick" destination="NMp-EF-RFA" eventType="touchUpInside" id="2VD-kc-Ecd"/>
                         </connections>
                     </button>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="CS6-Wq-JVe" userLabel="ActivityIndicator">
+                        <rect key="frame" x="313" y="0.0" width="42" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="42" id="GGD-4v-07r"/>
+                            <constraint firstAttribute="height" constant="42" id="NbP-sS-fMR"/>
+                        </constraints>
+                    </activityIndicatorView>
                 </subviews>
                 <color key="backgroundColor" name="YP Black"/>
                 <constraints>
+                    <constraint firstItem="Pxx-qn-qF8" firstAttribute="trailing" secondItem="CS6-Wq-JVe" secondAttribute="trailing" constant="4" id="0Mi-hK-sf9"/>
                     <constraint firstItem="QmI-Sd-h2n" firstAttribute="bottom" secondItem="Pxx-qn-qF8" secondAttribute="bottom" id="7MO-0h-Cy4"/>
                     <constraint firstItem="Pxx-qn-qF8" firstAttribute="trailing" secondItem="VVT-PR-3gB" secondAttribute="trailing" id="A9k-Sc-DqZ"/>
+                    <constraint firstItem="CS6-Wq-JVe" firstAttribute="top" secondItem="Pxx-qn-qF8" secondAttribute="top" id="Hpv-Tq-T26"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YED-RW-fZB" secondAttribute="trailing" constant="20" symbolic="YES" id="Rjl-RX-l2B"/>
                     <constraint firstAttribute="trailing" secondItem="Pxx-qn-qF8" secondAttribute="trailing" constant="16" id="Sez-os-EyC"/>
                     <constraint firstItem="YED-RW-fZB" firstAttribute="bottom" secondItem="Pxx-qn-qF8" secondAttribute="bottom" constant="-8" id="Sua-iL-uaU"/>
@@ -78,6 +88,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" name="YP Black"/>
             <connections>
+                <outlet property="activityIndicator" destination="CS6-Wq-JVe" id="Eud-Uy-6yX"/>
                 <outlet property="contentImage" destination="Pxx-qn-qF8" id="gCE-Ew-p8O"/>
                 <outlet property="dateLabel" destination="YED-RW-fZB" id="ueu-u7-CSn"/>
                 <outlet property="favoritesButton" destination="VVT-PR-3gB" id="BcU-ef-3A7"/>
@@ -88,6 +99,7 @@
     <resources>
         <image name="Favorites_NoActive" width="44" height="44"/>
         <image name="Gradient" width="343" height="30"/>
+        <image name="Placeholder" width="83" height="75"/>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

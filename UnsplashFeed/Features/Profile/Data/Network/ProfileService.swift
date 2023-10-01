@@ -1,7 +1,7 @@
 import Foundation
 
 final class ProfileService: ProfileServiceProtocol {
-    private let urlSessionService = URLSessionServise()
+    private let urlSessionService = URLSessionService()
     
     func fetchProfileProperties(
         token: String,

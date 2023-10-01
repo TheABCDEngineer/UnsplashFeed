@@ -8,7 +8,7 @@
 import Foundation
 
 final class OAuth2Service: OAuth2ServiceProtocol {
-    private let urlSessionService = URLSessionServise()
+    private let urlSessionService = URLSessionService()
     private let baseURL = "https://unsplash.com"
  
     func fetchOAuthToken(

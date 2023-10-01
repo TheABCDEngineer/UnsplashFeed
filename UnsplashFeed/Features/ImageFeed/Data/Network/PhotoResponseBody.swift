@@ -18,5 +18,3 @@ struct PhotoResponseBody: Decodable {
         case urls
     }
 }
-
-typealias PhotosResponseData = [PhotoResponseBody]

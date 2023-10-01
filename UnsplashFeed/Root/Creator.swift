@@ -29,7 +29,8 @@ final class Creator {
     
     static func createImageListPresenter() -> ImageListPresenter {
         return ImageListPresenter(
-            photoFactory: injectPhotoFactoryProtocol()
+            photoFactory: injectPhotoFactoryProtocol(),
+            favoritesRepository: injectFavoritesRepository()
         )
     }
 }
@@ -46,6 +47,12 @@ extension Creator {
     
     static func injectPhotoRepository() -> PhotoRepository {
         return PhotoRepositoryImplNetwork()
+    }
+    
+    static func injectFavoritesRepository() -> FavoritesRepository {
+        return FavoritesRepositoryImplNetwork(
+            tokenRepository: injectOAuth2TokenRepository()
+        )
     }
 }
 

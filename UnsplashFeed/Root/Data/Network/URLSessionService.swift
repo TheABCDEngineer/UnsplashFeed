@@ -1,6 +1,6 @@
 import Foundation
 
-final class URLSessionServise {
+final class URLSessionService {
     private var task: URLSessionTask?
     private var previousSessionSettings: SessionSettings?
     
@@ -49,8 +49,8 @@ final class URLSessionServise {
                 completion(.success(body))
             case .failure(let error):
                 completion(.failure(error))
-                self.previousSessionSettings = nil
             }
+            self.previousSessionSettings = nil
             self.task = nil
         }
         
@@ -58,7 +58,7 @@ final class URLSessionServise {
     }
 }
 
-private extension URLSessionServise {
+private extension URLSessionService {
     struct SessionSettings: Equatable {
         let urlPath: String
         let httpMethod: String

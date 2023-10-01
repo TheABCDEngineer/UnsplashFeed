@@ -6,5 +6,5 @@ struct PhotoModel {
     let welcomeDescription: String?
     let thumbImageURL: String?
     let largeImageURL: String?
-    let isLiked: Bool
+    let isLiked: Bool?
 }
