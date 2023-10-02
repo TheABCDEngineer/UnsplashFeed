@@ -24,15 +24,13 @@ final class ImageListCell: UITableViewCell {
         contentImage.kf.cancelDownloadTask()
     }
     
-    func configCell(imageStringUrl: String, date: Date, isFavorite: Bool?) {
+    func configCell(imageStringUrl: String, date: Date?, isFavorite: Bool?) {
         let url = URL(string: imageStringUrl)
         contentImage.kf.setImage(
             with: url,
             placeholder: UIImage(named: "Placeholder")
         )
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM YYYY"
-        dateLabel.text = dateFormatter.string(from: date)
+        dateLabel.text = DateConverter.shared.string(from: date)
         
         guard let isFavorite else {
             favoritesStateLoading(true)

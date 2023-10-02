@@ -46,7 +46,9 @@ final class ImageListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case singleImageViewIdentifier:
-            let viewController = segue.destination as! SingleImageViewController
+            guard let viewController = segue.destination as? SingleImageViewController else {
+                fatalError("Can't find SingleImageViewController")
+            }
             viewController.imageStringUrl = sender as? String
         default:
             super.prepare(for: segue, sender: sender)
@@ -89,7 +91,7 @@ extension ImageListViewController: UITableViewDataSource {
         let photo = photos[indexPath.row]
         cell.configCell(
             imageStringUrl: photo.thumbImageURL ?? "",
-            date: photo.createdAt ?? Date(),
+            date: photo.createdAt,
             isFavorite: photo.isLiked
         )
         return cell

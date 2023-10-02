@@ -18,7 +18,9 @@ final class AuthViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case webViewIdentifier:
-            let viewController = segue.destination as! WebViewController
+            guard let viewController = segue.destination as? WebViewController else {
+                fatalError("Can't find WebViewController")
+            }
             viewController.setDelegate(self)
         default:
             super.prepare(for: segue, sender: sender)

@@ -30,10 +30,10 @@ final class SingleImageViewController: UIViewController {
     }
     
     private func initImage(_ stringUrl: String?) {
-        if stringUrl == nil { return }
+        guard let stringUrl else { return }
         ProgressHUD.show()
         
-        let url = URL(string: stringUrl!)
+        let url = URL(string: stringUrl)
         imageView.kf.setImage(
             with: url,
             completionHandler: { [weak self] _ in

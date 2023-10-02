@@ -41,6 +41,7 @@
 		AB8D698C2AC82161005B9F60 /* LikeResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D698B2AC82161005B9F60 /* LikeResponseBody.swift */; };
 		AB8D698E2AC85D34005B9F60 /* ImageListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D698D2AC85D34005B9F60 /* ImageListCellDelegate.swift */; };
 		AB8D69902AC94DBF005B9F60 /* FavoritePhotoResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D698F2AC94DBF005B9F60 /* FavoritePhotoResponseBody.swift */; };
+		AB8D69942ACB3B22005B9F60 /* DateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D69932ACB3B22005B9F60 /* DateConverter.swift */; };
 		ABA969242A87CB6E00581EA5 /* WebViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA969232A87CB6E00581EA5 /* WebViewControllerDelegate.swift */; };
 		ABA9692B2A88C67B00581EA5 /* OAuth2TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA9692A2A88C67B00581EA5 /* OAuth2TokenRepository.swift */; };
 		ABA969342A88D44200581EA5 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA969332A88D44200581EA5 /* WebViewPresenter.swift */; };
@@ -107,6 +108,7 @@
 		AB8D698B2AC82161005B9F60 /* LikeResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeResponseBody.swift; sourceTree = "<group>"; };
 		AB8D698D2AC85D34005B9F60 /* ImageListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListCellDelegate.swift; sourceTree = "<group>"; };
 		AB8D698F2AC94DBF005B9F60 /* FavoritePhotoResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePhotoResponseBody.swift; sourceTree = "<group>"; };
+		AB8D69932ACB3B22005B9F60 /* DateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverter.swift; sourceTree = "<group>"; };
 		ABA969232A87CB6E00581EA5 /* WebViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerDelegate.swift; sourceTree = "<group>"; };
 		ABA9692A2A88C67B00581EA5 /* OAuth2TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenRepository.swift; sourceTree = "<group>"; };
 		ABA969332A88D44200581EA5 /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				ABA969442A89059700581EA5 /* Creator.swift */,
 				AB2E69D42AC359240047A96C /* Queue.swift */,
 				AB2E69D62AC431B20047A96C /* ObservableData.swift */,
+				AB8D69932ACB3B22005B9F60 /* DateConverter.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				ABE529EA2A93BECE00C711C8 /* ProfileRepositoryImplSingleton.swift in Sources */,
 				AB8884EE2A913CC20082FA6B /* ProfilePresenter.swift in Sources */,
 				ABE529EF2A9520FF00C711C8 /* ProfileLoader.swift in Sources */,
+				AB8D69942ACB3B22005B9F60 /* DateConverter.swift in Sources */,
 				AB612B052A54095100A052EE /* UIColor+Extensions.swift in Sources */,
 				AB8D698C2AC82161005B9F60 /* LikeResponseBody.swift in Sources */,
 				ABA9693B2A88ECB700581EA5 /* NetworkError.swift in Sources */,

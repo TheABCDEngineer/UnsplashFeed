@@ -4,7 +4,7 @@ final class PhotoFactory: PhotoFactoryProtocol {
     private let photoRepository: PhotoRepository
     private let tokenRepository: OAuth2TokenRepository
     private let perPage = 10
-    private var page = 0
+    private var page = 1
     private let queue = Queue<Int>()
     
     init(
@@ -25,14 +25,14 @@ final class PhotoFactory: PhotoFactoryProtocol {
         onFailure: @escaping (NetworkError) -> Void
     ) {
         queue.setAction{ page in
-            if page == nil { return }
+            guard let page else { return }
             let token = self.tokenRepository.getToken()
             if token.isEmpty {
                 onFailure(.tokenError("Token not found in storage"))
                 return
             }
             self.photoRepository.fetchPhotosNextPage(
-                page: page!,
+                page: page,
                 perPage: self.perPage,
                 token: token,
                 onSuccess: { photos in

@@ -12,17 +12,14 @@ final class DataConverter {
         )
     }
     
-    static func mapPhoto(dto: PhotoResponseBody) -> PhotoModel {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        
+    static func mapPhoto(dto: PhotoResponseBody) -> PhotoModel {        
         return PhotoModel(
             id: dto.id,
             size: CGSize(
                 width: Double(dto.width),
                 height: Double(dto.height)
             ),
-            createdAt: dateFormatter.date(from: dto.createdAt),
+            createdAt: DateConverter.shared.date(from: dto.createdAt),
             welcomeDescription: dto.description,
             thumbImageURL: dto.urls["thumb"],
             largeImageURL: dto.urls["full"],
