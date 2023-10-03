@@ -32,11 +32,11 @@ final class AuthViewPresenter {
         errorDescription: String,
         completion: @escaping (UIAlertAction) -> Void
     ) -> AlertDialogModel {
-        return AlertDialogModel(
+        return AlertDialog.createDialogModel(
             title: "Что-то пошло не так(",
             message: "Не удалось войти в систему\n\(errorDescription)",
-            buttonTitle: "Ok",
-            completion: completion
+            applyTitle: "Ok",
+            applyAction: completion
         )
     }
 }

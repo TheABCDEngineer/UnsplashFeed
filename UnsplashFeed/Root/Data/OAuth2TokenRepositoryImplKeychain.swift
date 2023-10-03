@@ -5,11 +5,18 @@ final class OAuth2TokenRepositoryImplKeychain: OAuth2TokenRepository {
     private let keychain = KeychainWrapper.standard
     private let tokenKey = "token"
     
-    func getToken() -> String? {
-        return keychain.string(forKey: tokenKey)
+    func getToken() -> String {
+        guard let token = keychain.string(forKey: tokenKey) else {
+            return ""
+        }
+        return token
     }
     
     func putToken(_ token: String) {
         keychain.set(token, forKey: tokenKey)
+    }
+    
+    func removeToken() {
+        keychain.set("", forKey: tokenKey)
     }
 }

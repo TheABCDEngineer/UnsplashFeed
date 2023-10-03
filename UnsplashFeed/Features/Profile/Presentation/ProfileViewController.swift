@@ -37,7 +37,11 @@ final class ProfileViewController: UIViewController {
     
     @objc
     private func onLogoutButtonClick() {
-     
+        let logoutDialogModel = presenter.onProfileLogout {
+            guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+            window.rootViewController = SplashViewController()
+        }
+        AlertDialog.showAlert(self, model: logoutDialogModel)
     }
     
     private func updateProfileProperties(_ model: ProfilePropertiesModel) {
@@ -54,6 +58,13 @@ final class ProfileViewController: UIViewController {
             options: [.processor(processor)]
         )
         userAvatarView.layer.cornerRadius = 40
+    }
+}
+
+//MARK: - AlertPresenterProtocol
+extension ProfileViewController: AlertPresenterProtocol {
+    func present(_ alert: UIAlertController) {
+        self.present(alert, animated: true)
     }
 }
 

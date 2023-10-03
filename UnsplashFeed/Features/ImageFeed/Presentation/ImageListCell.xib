@@ -17,8 +17,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="298"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="Pxx-qn-qF8" userLabel="Image">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Pxx-qn-qF8" userLabel="Image">
                         <rect key="frame" x="16" y="0.0" width="343" height="290"/>
+                        <color key="backgroundColor" name="YP Gray"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="16"/>
@@ -37,20 +39,41 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Favorites_NoActive" translatesAutoresizingMaskIntoConstraints="NO" id="u8H-ol-qfa" userLabel="Favorites">
-                        <rect key="frame" x="315" y="0.0" width="44" height="44"/>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="26 августа 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YED-RW-fZB" userLabel="DateLabel">
                         <rect key="frame" x="24" y="266" width="103" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" name="YP White"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="bottom" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVT-PR-3gB" userLabel="Favorites">
+                        <rect key="frame" x="315" y="0.0" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="3MC-zg-mV6"/>
+                            <constraint firstAttribute="width" constant="44" id="csS-hW-LW4"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="Button" image="Favorites_NoActive"/>
+                        <buttonConfiguration key="configuration" style="plain" image="Favorites_NoActive" title=" ">
+                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="onFavoritesButtonClick" destination="NMp-EF-RFA" eventType="touchUpInside" id="2VD-kc-Ecd"/>
+                        </connections>
+                    </button>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="CS6-Wq-JVe" userLabel="ActivityIndicator">
+                        <rect key="frame" x="313" y="0.0" width="42" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="42" id="GGD-4v-07r"/>
+                            <constraint firstAttribute="height" constant="42" id="NbP-sS-fMR"/>
+                        </constraints>
+                    </activityIndicatorView>
                 </subviews>
                 <color key="backgroundColor" name="YP Black"/>
                 <constraints>
+                    <constraint firstItem="Pxx-qn-qF8" firstAttribute="trailing" secondItem="CS6-Wq-JVe" secondAttribute="trailing" constant="4" id="0Mi-hK-sf9"/>
                     <constraint firstItem="QmI-Sd-h2n" firstAttribute="bottom" secondItem="Pxx-qn-qF8" secondAttribute="bottom" id="7MO-0h-Cy4"/>
-                    <constraint firstItem="u8H-ol-qfa" firstAttribute="top" secondItem="Pxx-qn-qF8" secondAttribute="top" id="7fz-vX-sat"/>
+                    <constraint firstItem="Pxx-qn-qF8" firstAttribute="trailing" secondItem="VVT-PR-3gB" secondAttribute="trailing" id="A9k-Sc-DqZ"/>
+                    <constraint firstItem="CS6-Wq-JVe" firstAttribute="top" secondItem="Pxx-qn-qF8" secondAttribute="top" id="Hpv-Tq-T26"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YED-RW-fZB" secondAttribute="trailing" constant="20" symbolic="YES" id="Rjl-RX-l2B"/>
                     <constraint firstAttribute="trailing" secondItem="Pxx-qn-qF8" secondAttribute="trailing" constant="16" id="Sez-os-EyC"/>
                     <constraint firstItem="YED-RW-fZB" firstAttribute="bottom" secondItem="Pxx-qn-qF8" secondAttribute="bottom" constant="-8" id="Sua-iL-uaU"/>
@@ -59,25 +82,29 @@
                     <constraint firstItem="Pxx-qn-qF8" firstAttribute="top" secondItem="CTG-wh-h7M" secondAttribute="top" id="j5U-VK-BvA"/>
                     <constraint firstAttribute="bottom" secondItem="Pxx-qn-qF8" secondAttribute="bottom" constant="8" id="rqJ-g7-wvS"/>
                     <constraint firstItem="QmI-Sd-h2n" firstAttribute="leading" secondItem="Pxx-qn-qF8" secondAttribute="leading" constant="-16" id="sY9-rC-Fqf"/>
-                    <constraint firstItem="u8H-ol-qfa" firstAttribute="trailing" secondItem="Pxx-qn-qF8" secondAttribute="trailing" id="vDg-X3-1y8"/>
+                    <constraint firstItem="VVT-PR-3gB" firstAttribute="top" secondItem="Pxx-qn-qF8" secondAttribute="top" id="vzW-pN-yM4"/>
                     <constraint firstItem="QmI-Sd-h2n" firstAttribute="trailing" secondItem="Pxx-qn-qF8" secondAttribute="trailing" constant="16" id="yeU-MC-dBv"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" name="YP Black"/>
             <connections>
+                <outlet property="activityIndicator" destination="CS6-Wq-JVe" id="Eud-Uy-6yX"/>
                 <outlet property="contentImage" destination="Pxx-qn-qF8" id="gCE-Ew-p8O"/>
                 <outlet property="dateLabel" destination="YED-RW-fZB" id="ueu-u7-CSn"/>
-                <outlet property="favorites" destination="u8H-ol-qfa" id="jnO-3f-Di2"/>
+                <outlet property="favoritesButton" destination="VVT-PR-3gB" id="BcU-ef-3A7"/>
             </connections>
             <point key="canvasLocation" x="-83.206106870229007" y="10.563380281690142"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="0" width="200" height="132"/>
         <image name="Favorites_NoActive" width="44" height="44"/>
         <image name="Gradient" width="343" height="30"/>
+        <image name="Placeholder" width="83" height="75"/>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="YP Gray">
+            <color red="0.68199998140335083" green="0.68599998950958252" blue="0.70599997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="YP White">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

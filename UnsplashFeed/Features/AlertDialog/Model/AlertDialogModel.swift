@@ -3,6 +3,8 @@ import UIKit
 struct AlertDialogModel {
     let title: String
     let message: String
-    let buttonTitle: String
-    let completion: (UIAlertAction) -> Void
+    let applyTitle: String
+    let cancelTitle: String
+    let applyAction: (UIAlertAction) -> Void
+    let cancelAction: ((UIAlertAction) -> Void)?
 }

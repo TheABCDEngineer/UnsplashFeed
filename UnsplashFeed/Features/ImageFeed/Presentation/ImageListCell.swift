@@ -6,20 +6,61 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ImageListCell: UITableViewCell {
     static let identifier = "ImageListCell"
     
-    @IBOutlet private var favorites: UIImageView!
-    @IBOutlet private var contentImage: UIImageView!
-    @IBOutlet private var dateLabel: UILabel!
+    private var delegate: ImageListCellDelegate?
+    private var imageListRow: Int = 0
     
-    func configCell(image: UIImage?, date: Date, isFavorite: Bool) {
-        contentImage.image = image
-        favorites.image = isFavorite ? UIImage(named: "Favorites_Active") : UIImage(named: "Favorites_NoActive")
+    @IBOutlet private weak var favoritesButton: UIButton!
+    @IBOutlet private weak var contentImage: UIImageView!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        contentImage.kf.cancelDownloadTask()
+    }
+    
+    func configCell(imageStringUrl: String, date: Date?, isFavorite: Bool?) {
+        let url = URL(string: imageStringUrl)
+        contentImage.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "Placeholder")
+        )
+        dateLabel.text = DateConverter.shared.string(from: date)
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM YYYY"
-        dateLabel.text = dateFormatter.string(from: date)
+        guard let isFavorite else {
+            favoritesStateLoading(true)
+            return
+        }
+        
+        let image = isFavorite ? UIImage(named: "Favorites_Active") : UIImage(named: "Favorites_NoActive")
+        favoritesButton.setImage(image, for: .normal)
+    }
+    
+    func setDelegate(_ delegate: ImageListCellDelegate) {
+        self.delegate = delegate
+    }
+    
+    func setRow(_ value: Int) {
+        imageListRow = value
+    }
+    
+    private func favoritesStateLoading(_ isLoading: Bool) {
+        favoritesButton.isHidden = isLoading
+        activityIndicator.isHidden = !isLoading
+    }
+    
+    @IBAction private func onFavoritesButtonClick() {
+        favoritesStateLoading(true)
+        delegate?.changeLike(for: imageListRow) { [weak self] isLiked in
+            guard let self else { return }
+            let image = isLiked ? UIImage(named: "Favorites_Active") : UIImage(named: "Favorites_NoActive")
+            self.favoritesButton.setImage(image, for: .normal)
+            self.favoritesStateLoading(false)
+        }
     }
 }
