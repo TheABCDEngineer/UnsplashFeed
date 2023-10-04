@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 final class WebViewController: UIViewController {
-    private let presenter = Creator.createWebViewPresenter()
+    var presenter = Creator.createWebViewPresenter()
     private weak var delegate: WebViewControllerDelegate?
     private var estimatedProgressObservation: NSKeyValueObservation?
     @IBOutlet weak private var webView: WKWebView!

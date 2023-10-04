@@ -8,7 +8,7 @@
 import UIKit
 
 final class ImageListViewController: UIViewController {
-    private let presenter = Creator.createImageListPresenter()
+    var presenter = Creator.createImageListPresenter()
     private let singleImageViewIdentifier = "toSingleImageView"
     private var photos = [PhotoModel]()
     

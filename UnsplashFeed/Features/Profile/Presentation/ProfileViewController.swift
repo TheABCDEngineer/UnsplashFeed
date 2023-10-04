@@ -18,7 +18,7 @@ final class ProfileViewController: UIViewController {
     private var profileBioView: UILabel!
     private var logoutButton: UIButton!
     
-    private let presenter = Creator.createProfilePresenter()
+    var presenter = Creator.createProfilePresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
