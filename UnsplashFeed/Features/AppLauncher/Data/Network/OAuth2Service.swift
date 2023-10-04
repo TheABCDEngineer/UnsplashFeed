@@ -10,6 +10,7 @@ import Foundation
 final class OAuth2Service: OAuth2ServiceProtocol {
     private let urlSessionService = URLSessionService()
     private let baseURL = "https://unsplash.com"
+    private let configuration = AuthConfiguration.standart
  
     func fetchOAuthToken(
             _ code: String,
@@ -17,7 +18,7 @@ final class OAuth2Service: OAuth2ServiceProtocol {
     ) {
         urlSessionService.fetch(
             urlPath: createOAuthPath(code: code),
-            httpMethod: "POST",
+            httpMethod: HttpMethod.POST,
             responseBody: OAuthResponseBody.self
         ) { (result: Result<OAuthResponseBody, Error>) in
             switch result {
@@ -31,9 +32,9 @@ final class OAuth2Service: OAuth2ServiceProtocol {
     
     private func createOAuthPath(code: String) -> String {
         return "https://unsplash.com/oauth/token"
-            + "?client_id=\(UnsplashApiParameters.AccessKey)"
-            + "&&client_secret=\(UnsplashApiParameters.SecretKey)"
-            + "&&redirect_uri=\(UnsplashApiParameters.RedirectURI)"
+        + "?client_id=\(configuration.accessKey)"
+        + "&&client_secret=\(configuration.secretKey)"
+        + "&&redirect_uri=\(configuration.redirectURI)"
             + "&&code=\(code)"
             + "&&grant_type=authorization_code"
         }

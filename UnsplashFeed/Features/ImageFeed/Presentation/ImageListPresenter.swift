@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ImageListPresenter {
+class ImageListPresenter: ImageListPresenterProtocol {
     private let photoFactory: PhotoFactoryProtocol
     private let favoritesRepository: FavoritesRepository
     private let photosObservable = ObservableData<[PhotoModel]>()

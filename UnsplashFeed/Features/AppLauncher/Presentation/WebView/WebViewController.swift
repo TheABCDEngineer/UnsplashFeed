@@ -17,10 +17,19 @@ final class WebViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.load(
-            URLRequest(url: presenter.getWebUrl())
-        )
         webView.navigationDelegate = self
+        presenter.urlRequestObserve{ [weak self] request in
+            guard let self else { return }
+            guard let request else { return }
+            self.updateWebSite(request)
+        }
+        presenter.webLoadingProgressObserve{ [weak self] state in
+            guard let self else { return }
+            guard let state else { return }
+            self.setProgressValue(state.progressValue)
+            self.setProgressHidden(state.isHiden)
+        }
+        presenter.onViewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,7 +39,7 @@ final class WebViewController: UIViewController {
             options: [],
             changeHandler: { [weak self] _, _ in
                 guard let self = self else { return }
-                self.updateProgress()
+                presenter.updateProgressValue(webView.estimatedProgress)
             }
         )
     }
@@ -46,9 +55,16 @@ final class WebViewController: UIViewController {
 
 //MARK: - Private funcs
 private extension WebViewController {
-    func updateProgress() {
-        progressView.progress = Float(webView.estimatedProgress)
-        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
+    func updateWebSite(_ request: URLRequest) {
+        webView.load(request)
+    }
+
+    func setProgressValue(_ value: Float) {
+        progressView.progress = value
+    }
+    
+    func setProgressHidden(_ isHidden: Bool) {
+        progressView.isHidden = isHidden
     }
 }
 

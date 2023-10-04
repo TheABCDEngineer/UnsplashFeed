@@ -4,7 +4,7 @@ import WebKit
 final class Creator {
     
 //MARK: - Presenters injections
-    static func createProfilePresenter() -> ProfilePresenter {
+    static func createProfilePresenter() -> ProfilePresenterProtocol {
         return ProfilePresenter(
             profileRepository: injectProfileRepository(),
             tokenRepository: injectOAuth2TokenRepository()
@@ -18,8 +18,10 @@ final class Creator {
         )
     }
     
-    static func createWebViewPresenter() -> WebViewPresenter {
-        return WebViewPresenter()
+    static func createWebViewPresenter() -> WebViewPresenterProtocol {
+        return WebViewPresenter(
+            authHelper: injectAuthHelperProtocol()
+        )
     }
     
     static func createAuthViewPresenter() -> AuthViewPresenter {
@@ -29,7 +31,7 @@ final class Creator {
         )
     }
     
-    static func createImageListPresenter() -> ImageListPresenter {
+    static func createImageListPresenter() -> ImageListPresenterProtocol {
         return ImageListPresenter(
             photoFactory: injectPhotoFactoryProtocol(),
             favoritesRepository: injectFavoritesRepository()
@@ -55,6 +57,10 @@ extension Creator {
         return FavoritesRepositoryImplNetwork(
             tokenRepository: injectOAuth2TokenRepository()
         )
+    }
+    
+    static func injectAuthHelperProtocol() -> AuthHelperProtocol {
+        return AuthHelper()
     }
 }
 

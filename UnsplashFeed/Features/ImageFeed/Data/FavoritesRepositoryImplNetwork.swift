@@ -23,7 +23,7 @@ final class FavoritesRepositoryImplNetwork: FavoritesRepository {
             return
         }
         urlSessionServiсe.fetch(
-            urlPath: "\(UnsplashApiParameters.BaseApiURL)/photos/\(id)/like",
+            urlPath: "\(AuthConfiguration.standart.defaultBaseURL)/photos/\(id)/like",
             httpMethod: httpMethod,
             header: "Bearer \(token)",
             headerField: "Authorization",
