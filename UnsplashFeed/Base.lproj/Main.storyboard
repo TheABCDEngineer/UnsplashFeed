@@ -65,7 +65,7 @@
         <!--Web View Controller-->
         <scene sceneID="3q3-TE-SYq">
             <objects>
-                <viewController id="fy3-IQ-GNp" customClass="WebViewController" customModule="UnsplashFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewController" id="fy3-IQ-GNp" customClass="WebViewController" customModule="UnsplashFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cum-Ql-J8k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

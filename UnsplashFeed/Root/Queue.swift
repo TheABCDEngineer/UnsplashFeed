@@ -17,8 +17,9 @@ final class Queue<Parameter> {
     
     func next() {
         if parameters.isEmpty { return }
-        action?(parameters[0])
+        let parameter = parameters[0]
         parameters.remove(at: 0)
+        action?(parameter)
     }
     
     func reset() {

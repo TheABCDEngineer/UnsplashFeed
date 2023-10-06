@@ -8,7 +8,14 @@ final class AuthHelper: AuthHelperProtocol {
     }
     
     func authRequest() -> URLRequest? {
-        var urlComponents = URLComponents(string: configuration.authURLString)!
+        guard let url = authURL() else { return nil }
+        return URLRequest(url: url)
+    }
+    
+    func authURL() -> URL? {
+        guard var urlComponents = URLComponents(string: configuration.authURLString) else {
+            return nil
+        }
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: configuration.accessKey),
             URLQueryItem(name: "redirect_uri", value: configuration.redirectURI),
@@ -16,7 +23,7 @@ final class AuthHelper: AuthHelperProtocol {
             URLQueryItem(name: "scope", value: configuration.accessScope)
          ]
         guard let url = urlComponents.url else { return nil }
-        return URLRequest(url: url)
+        return url
     }
     
     func code(from url: URL?) -> String? {
