@@ -130,6 +130,7 @@ extension ProfileViewController {
         logoutButton.centerYAnchor.constraint(
             equalTo: userAvatarView.centerYAnchor
         ).isActive = true
+        logoutButton.accessibilityIdentifier = "LogoutButton"
     }
     
     private func initUserPropertyLabel(

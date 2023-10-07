@@ -47,6 +47,7 @@
                     </label>
                     <button opaque="NO" contentMode="bottom" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVT-PR-3gB" userLabel="Favorites">
                         <rect key="frame" x="315" y="0.0" width="44" height="44"/>
+                        <accessibility key="accessibilityConfiguration" identifier="FavotiteButton"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="3MC-zg-mV6"/>
                             <constraint firstAttribute="width" constant="44" id="csS-hW-LW4"/>

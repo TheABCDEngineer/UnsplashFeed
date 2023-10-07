@@ -17,6 +17,7 @@ final class WebViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        webView.accessibilityIdentifier = "UnsplashWebView"
         webView.navigationDelegate = self
         presenter.urlRequestObserve{ [weak self] request in
             guard let self else { return }

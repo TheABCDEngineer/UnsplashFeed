@@ -28,6 +28,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ViB-ei-CB9" userLabel="LoginButton">
                                 <rect key="frame" x="15.666666666666657" y="640" width="344" height="48"/>
                                 <color key="backgroundColor" name="YP White"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Authenticate"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="344" id="3iz-Qb-yIv"/>
                                     <constraint firstAttribute="height" constant="48" id="cHt-vS-gYq"/>
@@ -99,6 +100,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="51m-6Q-9YC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration" identifier="UnsplashWebView"/>
                         <constraints>
                             <constraint firstItem="MMF-hk-HSQ" firstAttribute="top" secondItem="Cum-Ql-J8k" secondAttribute="top" constant="54" id="4km-ml-XIj"/>
                             <constraint firstItem="MMF-hk-HSQ" firstAttribute="leading" secondItem="Cum-Ql-J8k" secondAttribute="leading" constant="8" id="Cfj-tX-6r6"/>
@@ -197,6 +199,7 @@
                             </scrollView>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SCt-oz-Sny" userLabel="Back_Button">
                                 <rect key="frame" x="8" y="56" width="24" height="24"/>
+                                <accessibility key="accessibilityConfiguration" identifier="BackButton"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="Pej-RB-3qL"/>
                                     <constraint firstAttribute="height" constant="24" id="UvP-fd-dYe"/>
