@@ -19,7 +19,8 @@ final class AuthViewController: UIViewController {
         switch segue.identifier {
         case webViewIdentifier:
             guard let viewController = segue.destination as? WebViewController else {
-                fatalError("Can't find WebViewController")
+                assertionFailure("Can't find WebViewController")
+                return
             }
             viewController.setDelegate(self)
         default:

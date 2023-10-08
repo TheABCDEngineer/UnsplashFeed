@@ -18,7 +18,11 @@ final class WebViewPresenter: WebViewPresenterProtocol {
     }
     
     func onViewDidLoad() {
-        urlRequestObsevable.postValue(getUrlRequest())
+        guard let request = authHelper.authRequest() else {
+            assertionFailure("Can't create UrlRequest")
+            return
+        }
+        urlRequestObsevable.postValue(request)
     }
     
     func handleNavigationAction(
@@ -41,14 +45,7 @@ final class WebViewPresenter: WebViewPresenterProtocol {
         webLoadingProgressObservable.postValue(progressState)
     }
     
-//MARK: - Private methods
-    private func getUrlRequest() -> URLRequest {
-        guard let request = authHelper.authRequest() else {
-            fatalError("Can't create UrlRequest")
-        }
-        return request
-    }
-    
+//MARK: - Private methods    
     private func fetchCode(from url: URL?) -> String? {
         return authHelper.code(from: url)
     }

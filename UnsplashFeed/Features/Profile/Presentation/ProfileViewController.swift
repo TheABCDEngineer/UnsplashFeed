@@ -38,7 +38,10 @@ final class ProfileViewController: UIViewController {
     @objc
     private func onLogoutButtonClick() {
         let logoutDialogModel = presenter.onProfileLogout {
-            guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+            guard let window = UIApplication.shared.windows.first else {
+                assertionFailure("Invalid Configuration when logout")
+                return
+            }
             window.rootViewController = SplashViewController()
         }
         AlertDialog.showAlert(self, model: logoutDialogModel)

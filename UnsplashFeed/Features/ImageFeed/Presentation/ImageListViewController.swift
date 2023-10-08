@@ -47,7 +47,8 @@ final class ImageListViewController: UIViewController {
         switch segue.identifier {
         case singleImageViewIdentifier:
             guard let viewController = segue.destination as? SingleImageViewController else {
-                fatalError("Can't find SingleImageViewController")
+                assertionFailure("Can't find SingleImageViewController")
+                return
             }
             viewController.imageStringUrl = sender as? String
         default:
