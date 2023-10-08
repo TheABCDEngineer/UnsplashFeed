@@ -2,13 +2,14 @@ import Foundation
 
 final class ProfileService: ProfileServiceProtocol {
     private let urlSessionService = URLSessionService()
+    private let apiUrl = AuthConfiguration.standart.defaultBaseURL
     
     func fetchProfileProperties(
         token: String,
         completion: @escaping (Result<ProfilePropertiesModel, Error>) -> Void
     ) {
         urlSessionService.fetch(
-            urlPath: "\(UnsplashApiParameters.BaseApiURL)/me",
+            urlPath: "\(apiUrl)/me",
             httpMethod: "GET",
             header: "Bearer \(token)",
             headerField: "Authorization",
@@ -30,7 +31,7 @@ final class ProfileService: ProfileServiceProtocol {
         completion: @escaping (Result<String?, Error>) -> Void
     ) {
         urlSessionService.fetch(
-            urlPath: "\(UnsplashApiParameters.BaseApiURL)/users/\(userName)",
+            urlPath: "\(apiUrl)/users/\(userName)",
             httpMethod: "GET",
             header: "Bearer \(token)",
             headerField: "Authorization",

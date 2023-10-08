@@ -39,7 +39,10 @@ final class URLSessionService {
         let decoder = JSONDecoder()
         
         task = URLSession.shared.data(for: request) { [weak self] (result: Result<Data, Error>) in
-            guard let self else { fatalError("URLSassionService failed") }
+            guard let self else {
+                assertionFailure("URLSassionService failed")
+                return
+            }
             
             let response = result.flatMap { data -> Result<T, Error> in
                 Result { try decoder.decode(T.self, from: data) }

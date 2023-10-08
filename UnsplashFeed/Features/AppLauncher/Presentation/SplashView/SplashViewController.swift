@@ -44,7 +44,10 @@ extension SplashViewController: AppLauncherProtocol {
     }
     
     func switchToMainController() {
-        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+        guard let window = UIApplication.shared.windows.first else {
+            assertionFailure("Invalid Configuration when switch to \(mainControllerIndetifier)")
+            return
+        }
         let mainController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: mainControllerIndetifier)
         window.rootViewController = mainController
@@ -69,7 +72,10 @@ private extension SplashViewController {
         
         guard let authViewController = storyboard.instantiateViewController(
             withIdentifier: authViewIdentifier
-        ) as? AuthViewController else { fatalError("Can't create AuthViewController")}
+        ) as? AuthViewController else {
+            assertionFailure("Can't create \(authViewIdentifier)")
+            return
+        }
         
         authViewController.modalPresentationStyle = .fullScreen
         authViewController.setDelegate(self)

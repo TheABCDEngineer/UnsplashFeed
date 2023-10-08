@@ -12,7 +12,7 @@ final class PhotoRepositoryImplNetwork: PhotoRepository {
     ) {
         urlSessionService.fetch(
             urlPath: urlPath(page: page, perPage: perPage),
-            httpMethod: "GET",
+            httpMethod: HttpMethod.GET,
             header: "Bearer \(token)",
             headerField: "Authorization",
             responseBody: [PhotoResponseBody].self
@@ -29,7 +29,7 @@ final class PhotoRepositoryImplNetwork: PhotoRepository {
     }
     
     private func urlPath(page: Int, perPage: Int) -> String {
-        return "\(UnsplashApiParameters.BaseApiURL)/photos?page=\(page)&per_page=\(perPage)"
+        return "\(AuthConfiguration.standart.defaultBaseURL)/photos?page=\(page)&per_page=\(perPage)"
     }
     
 }

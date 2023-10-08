@@ -8,7 +8,7 @@
 import UIKit
 
 final class ImageListViewController: UIViewController {
-    private let presenter = Creator.createImageListPresenter()
+    var presenter = Creator.createImageListPresenter()
     private let singleImageViewIdentifier = "toSingleImageView"
     private var photos = [PhotoModel]()
     
@@ -47,7 +47,8 @@ final class ImageListViewController: UIViewController {
         switch segue.identifier {
         case singleImageViewIdentifier:
             guard let viewController = segue.destination as? SingleImageViewController else {
-                fatalError("Can't find SingleImageViewController")
+                assertionFailure("Can't find SingleImageViewController")
+                return
             }
             viewController.imageStringUrl = sender as? String
         default:

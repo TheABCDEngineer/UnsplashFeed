@@ -8,21 +8,21 @@
 import Foundation
 import WebKit
 
-final class WebViewPresenter {
-    private struct WebAuthValue {
-        static let code = "code"
-        static let authPath = "/oauth/authorize/native"
+final class WebViewPresenter: WebViewPresenterProtocol {
+    private let authHelper: AuthHelperProtocol
+    private let urlRequestObsevable = ObservableData<URLRequest>()
+    private let webLoadingProgressObservable = ObservableData<ProgressState>()
+    
+    init(authHelper: AuthHelperProtocol) {
+        self.authHelper = authHelper
     }
     
-    func getWebUrl() -> URL {
-        var urlComponents = URLComponents(string: UnsplashApiParameters.AuthorizeURLString)!
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: UnsplashApiParameters.AccessKey),
-            URLQueryItem(name: "redirect_uri", value: UnsplashApiParameters.RedirectURI),
-            URLQueryItem(name: "response_type", value: WebAuthValue.code),
-            URLQueryItem(name: "scope", value: UnsplashApiParameters.AccessScope)
-         ]
-        return urlComponents.url!
+    func onViewDidLoad() {
+        guard let request = authHelper.authRequest() else {
+            assertionFailure("Can't create UrlRequest")
+            return
+        }
+        urlRequestObsevable.postValue(request)
     }
     
     func handleNavigationAction(
@@ -37,13 +37,26 @@ final class WebViewPresenter {
         }
     }
     
+    func updateProgressValue(_ value: Double) {
+        let progressState = ProgressState(
+            progressValue: Float(value),
+            isHiden: fabs(value - 1.0) <= 0.0001
+        )
+        webLoadingProgressObservable.postValue(progressState)
+    }
+    
+//MARK: - Private methods    
     private func fetchCode(from url: URL?) -> String? {
-        guard
-            let url = url,
-            let urlComponents = URLComponents(string: url.absoluteString),
-            urlComponents.path == WebAuthValue.authPath,
-            let codeItem = urlComponents.queryItems?.first(where: { $0.name == WebAuthValue.code })
-        else { return nil }
-            return codeItem.value
+        return authHelper.code(from: url)
+    }
+}
+//MARK: - set View Observers
+extension WebViewPresenter {
+    func urlRequestObserve(_ completion: @escaping (URLRequest?) -> Void) {
+        urlRequestObsevable.observe(completion)
+    }
+    
+    func webLoadingProgressObserve(_ completion: @escaping (ProgressState?) -> Void) {
+        webLoadingProgressObservable.observe(completion)
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-final class ProfilePresenter {
+final class ProfilePresenter: ProfilePresenterProtocol {
     private let profileRepository: ProfileRepository
     private let tokenRepository: OAuth2TokenRepository
     private var profileLoaderObserver: NSObjectProtocol?
